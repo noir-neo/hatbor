@@ -1,0 +1,22 @@
+{
+    "name": "Hatbor.Avatar",
+    "rootNamespace": "Hatbor.Avatar",
+    "references": [
+        "VContainer",
+        "UniTask",
+        "UniRx",
+        "VRM10",
+        "VRMShaders.GLTF.IO.Runtime",
+        "UniGLTF",
+        "Hatbor.Rig"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
