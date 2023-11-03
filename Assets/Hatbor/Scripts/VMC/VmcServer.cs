@@ -30,8 +30,6 @@ namespace Hatbor.VMC
         public IReadOnlyDictionary<string, float> BlendShapeValues { get; private set; } = new Dictionary<string, float>();
 
         public Pose CameraPose { get; private set; }
-        public Vector3 CameraPosition { get; private set; }
-        public Quaternion CameraRotation { get; private set; }
         public float CameraFov { get; private set; }
 
         [Inject]
