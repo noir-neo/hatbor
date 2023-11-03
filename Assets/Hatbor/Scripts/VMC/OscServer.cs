@@ -30,6 +30,7 @@ namespace Hatbor.VMC
 
             thread.Stop();
             udp.Stop();
+            isStarted = false;
         }
 
         void UpdateMessage()
