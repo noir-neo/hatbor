@@ -9,7 +9,8 @@
     "Hatbor.VMC",
     "Hatbor.Rig.VMC",
     "Hatbor.Rig",
-    "Hatbor.Camera"
+    "Hatbor.Camera",
+    "Hatbor.Settings"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

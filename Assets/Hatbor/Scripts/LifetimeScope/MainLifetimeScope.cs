@@ -1,6 +1,7 @@
 using Hatbor.Avatar;
 using Hatbor.Rig;
 using Hatbor.Rig.VMC;
+using Hatbor.Settings;
 using Hatbor.VMC;
 using UnityEngine;
 using VContainer;
@@ -14,7 +15,7 @@ namespace Hatbor.LifetimeScope
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<VmcServerSettings>(Lifetime.Singleton);
+            builder.Register<ISettings, VmcServerSettings>(Lifetime.Singleton).AsSelf();
             builder.RegisterEntryPoint<VmcServer>(Lifetime.Singleton).AsSelf();
 
             builder.Register<IRootTransformRig, VmcRootTransformRig>(Lifetime.Singleton);
