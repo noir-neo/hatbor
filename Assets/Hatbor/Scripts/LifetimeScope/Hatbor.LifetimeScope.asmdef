@@ -1,0 +1,22 @@
+{
+  "name": "Hatbor.LifetimeScope",
+  "rootNamespace": "Hatbor.LifetimeScope",
+  "references": [
+    "VContainer",
+    "UniTask",
+    "UniRx",
+    "Hatbor.Avatar",
+    "Hatbor.VMC",
+    "Hatbor.Rig.VMC",
+    "Hatbor.Rig"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

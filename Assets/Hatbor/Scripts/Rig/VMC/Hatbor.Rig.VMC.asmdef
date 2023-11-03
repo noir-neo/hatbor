@@ -1,0 +1,21 @@
+{
+    "name": "Hatbor.Rig.VMC",
+    "rootNamespace": "Hatbor.Rig.VMC",
+    "references": [
+        "VContainer",
+        "UniTask",
+        "UniRx",
+        "Hatbor.Rig",
+        "Hatbor.VMC",
+        "VRM10"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
