@@ -1,15 +1,11 @@
 {
-  "name": "Hatbor.LifetimeScope",
-  "rootNamespace": "Hatbor.LifetimeScope",
+  "name": "Hatbor.Camera",
+  "rootNamespace": "Hatbor.Camera",
   "references": [
     "VContainer",
     "UniTask",
     "UniRx",
-    "Hatbor.Avatar",
-    "Hatbor.VMC",
-    "Hatbor.Rig.VMC",
-    "Hatbor.Rig",
-    "Hatbor.Camera"
+    "Hatbor.Rig"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

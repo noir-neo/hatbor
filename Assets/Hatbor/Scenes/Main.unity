@@ -156,6 +156,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  mainCamera: {fileID: 330585545}
 --- !u!4 &86387448
 Transform:
   m_ObjectHideFlags: 0
