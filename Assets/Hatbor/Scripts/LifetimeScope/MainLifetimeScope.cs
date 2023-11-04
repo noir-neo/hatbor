@@ -29,6 +29,7 @@ namespace Hatbor.LifetimeScope
             builder.Register<IConfigurable, AvatarConfig>(Lifetime.Singleton).AsSelf();
             builder.RegisterEntryPoint<AvatarLoader>(Lifetime.Singleton);
 
+            builder.Register<IConfigurable, RenderConfig>(Lifetime.Singleton).AsSelf();
             builder.RegisterInstance(mainCamera);
             builder.RegisterEntryPoint<Camera.Camera>(Lifetime.Singleton);
         }
