@@ -1,18 +1,12 @@
 {
-  "name": "Hatbor.LifetimeScope",
-  "rootNamespace": "Hatbor.LifetimeScope",
+  "name": "Hatbor.FileBrowser",
+  "rootNamespace": "Hatbor.FileBrowser",
   "references": [
     "VContainer",
     "UniTask",
     "UniRx",
-    "Hatbor.Avatar",
-    "Hatbor.VMC",
-    "Hatbor.Rig.VMC",
-    "Hatbor.Rig",
-    "Hatbor.Camera",
-    "Hatbor.Config",
     "Hatbor.UI",
-    "Hatbor.FileBrowser"
+    "SFB"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

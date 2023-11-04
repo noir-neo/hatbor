@@ -1,6 +1,6 @@
+using Hatbor.Scripts.FileBrowser;
 using Hatbor.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
@@ -13,6 +13,7 @@ namespace Hatbor.LifetimeScope
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<IFileBrowser, StandaloneFileBrowserWrapper>(Lifetime.Singleton);
             builder.RegisterInstance(configUIDocument);
             builder.RegisterEntryPoint<ConfigRoot>();
         }
