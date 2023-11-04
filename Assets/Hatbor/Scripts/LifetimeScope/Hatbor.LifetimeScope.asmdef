@@ -10,7 +10,7 @@
     "Hatbor.Rig.VMC",
     "Hatbor.Rig",
     "Hatbor.Camera",
-    "Hatbor.Settings",
+    "Hatbor.Config",
     "Hatbor.UI"
   ],
   "includePlatforms": [],

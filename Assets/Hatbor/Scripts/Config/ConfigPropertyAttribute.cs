@@ -1,13 +1,13 @@
 using System;
 
-namespace Hatbor.Settings
+namespace Hatbor.Config
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class SettingsPropertyAttribute : Attribute
+    public sealed class ConfigPropertyAttribute : Attribute
     {
         public string Label { get; set; }
 
-        public SettingsPropertyAttribute(string label)
+        public ConfigPropertyAttribute(string label)
         {
             Label = label;
         }

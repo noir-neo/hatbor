@@ -2,19 +2,19 @@ using System;
 using UniRx;
 using UnityEngine;
 
-namespace Hatbor.Settings
+namespace Hatbor.Config
 {
-    [Serializable, SettingsGroup("VmcServer")]
-    public sealed class VmcServerSettings : ISettings
+    [Serializable, ConfigGroup("VmcServer")]
+    public sealed class VmcServerConfig : IConfigurable
     {
-        const string PersistentKey = "VmcServerSettings";
+        const string PersistentKey = "VmcServerConfig";
 
         [SerializeField] public BoolReactiveProperty enabled = new(true);
         [SerializeField] public IntReactiveProperty port = new(39539);
 
-        [SettingsProperty("Enabled")]
+        [ConfigProperty("Enabled")]
         public ReactiveProperty<bool> Enabled => enabled;
-        [SettingsProperty("Port")]
+        [ConfigProperty("Port")]
         public ReactiveProperty<int> Port => port;
 
         public void Save()

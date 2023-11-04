@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Hatbor.Settings;
+using Hatbor.Config;
 using UniRx;
 using UnityEngine.UIElements;
 using VContainer;
@@ -8,29 +8,29 @@ using VContainer.Unity;
 
 namespace Hatbor.UI
 {
-    public sealed class SettingsRoot : IStartable, IDisposable
+    public sealed class ConfigRoot : IStartable, IDisposable
     {
         readonly UIDocument uiDocument;
-        readonly IEnumerable<ISettings> settings;
+        readonly IEnumerable<IConfigurable> configs;
 
         readonly CompositeDisposable disposables = new();
 
         [Inject]
-        public SettingsRoot(UIDocument uiDocument,
-            IEnumerable<ISettings> settings)
+        public ConfigRoot(UIDocument uiDocument,
+            IEnumerable<IConfigurable> configs)
         {
             this.uiDocument = uiDocument;
-            this.settings = settings;
+            this.configs = configs;
         }
 
         void IStartable.Start()
         {
             var container = uiDocument.rootVisualElement;
-            foreach (var setting in settings)
+            foreach (var config in configs)
             {
-                var settingsGroup = new SettingsGroup();
-                settingsGroup.Bind(setting).AddTo(disposables);
-                container.Q<VisualElement>("unity-content-container").Add(settingsGroup);
+                var configGroup = new ConfigGroup();
+                configGroup.Bind(config).AddTo(disposables);
+                container.Q<VisualElement>("unity-content-container").Add(configGroup);
             }
         }
 

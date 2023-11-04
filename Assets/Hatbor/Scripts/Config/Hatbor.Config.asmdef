@@ -1,6 +1,6 @@
 {
-    "name": "Hatbor.Settings",
-    "rootNamespace": "Hatbor.Settings",
+    "name": "Hatbor.Config",
+    "rootNamespace": "Hatbor.Config",
     "references": [
         "VContainer",
         "UniTask",

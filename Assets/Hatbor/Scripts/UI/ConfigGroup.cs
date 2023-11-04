@@ -1,41 +1,41 @@
 using System;
 using System.Reflection;
-using Hatbor.Settings;
+using Hatbor.Config;
 using UniRx;
 using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace Hatbor.UI
 {
-    public sealed class SettingsGroup : VisualElement
+    public sealed class ConfigGroup : VisualElement
     {
-        const string TemplatePath = "Assets/Hatbor/UI/SettingsGroup.uxml";
+        const string TemplatePath = "Assets/Hatbor/UI/ConfigGroup.uxml";
 
         readonly TemplateContainer container;
 
-        public SettingsGroup()
+        public ConfigGroup()
         {
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(TemplatePath);
             container = visualTree.Instantiate();
             hierarchy.Add(container);
         }
 
-        public IDisposable Bind(ISettings settings)
+        public IDisposable Bind(IConfigurable configurable)
         {
-            var settingsType = settings.GetType();
+            var configurableType = configurable.GetType();
 
             var label = container.Q<Label>();
-            label.text = GetSettingsGroupAttribute(settingsType).Label;
+            label.text = GetConfigGroupAttribute(configurableType).Label;
 
             var disposables = new CompositeDisposable();
 
-            foreach (var p in settingsType.GetMembers())
+            foreach (var p in configurableType.GetMembers())
             {
                 var provider = (ICustomAttributeProvider)p;
-                if (provider.GetCustomAttributes(typeof(SettingsPropertyAttribute),false) is not SettingsPropertyAttribute[] attributes || attributes.Length == 0)
+                if (provider.GetCustomAttributes(typeof(ConfigPropertyAttribute),false) is not ConfigPropertyAttribute[] attributes || attributes.Length == 0)
                     continue;
 
-                var property = settingsType.GetProperty(p.Name)?.GetValue(settings);
+                var property = configurableType.GetProperty(p.Name)?.GetValue(configurable);
                 var attr = attributes[0];
                 var (element, disposable) = CreateFieldAndBind(property, attr.Label);
                 disposable.AddTo(disposables);
@@ -45,9 +45,9 @@ namespace Hatbor.UI
             return disposables;
         }
 
-        static SettingsGroupAttribute GetSettingsGroupAttribute(ICustomAttributeProvider provider)
+        static ConfigGroupAttribute GetConfigGroupAttribute(ICustomAttributeProvider provider)
         {
-            return provider.GetCustomAttributes(typeof(SettingsGroupAttribute),false) is SettingsGroupAttribute[] { Length: > 0 } attributes
+            return provider.GetCustomAttributes(typeof(ConfigGroupAttribute),false) is ConfigGroupAttribute[] { Length: > 0 } attributes
                 ? attributes[0]
                 : null;
         }

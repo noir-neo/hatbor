@@ -6,7 +6,7 @@
         "UniTask",
         "UniRx",
         "Hatbor.VMC",
-        "Hatbor.Settings"
+        "Hatbor.Config"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

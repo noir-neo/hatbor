@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hatbor.Settings;
+using Hatbor.Config;
 using UniRx;
 using UnityEngine;
 using uOSC;
@@ -13,7 +13,7 @@ namespace Hatbor.VMC
 {
     public sealed class VmcServer : IStartable, IDisposable
     {
-        readonly VmcServerSettings settings;
+        readonly VmcServerConfig config;
 
         readonly OscServer server = new();
         readonly CompositeDisposable disposables = new();
@@ -34,15 +34,15 @@ namespace Hatbor.VMC
         public float CameraFov { get; private set; }
 
         [Inject]
-        public VmcServer(VmcServerSettings settings)
+        public VmcServer(VmcServerConfig config)
         {
-            this.settings = settings;
+            this.config = config;
         }
 
         void IStartable.Start()
         {
-            settings.Enabled
-                .CombineLatest(settings.Port, (enabled, port) => (enabled, port))
+            config.Enabled
+                .CombineLatest(config.Port, (enabled, port) => (enabled, port))
                 .Subscribe(t => {
                     if (t.enabled)
                     {
