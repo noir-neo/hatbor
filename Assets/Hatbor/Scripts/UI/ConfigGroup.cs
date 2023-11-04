@@ -11,10 +11,13 @@ namespace Hatbor.UI
     {
         const string TemplatePath = "Assets/Hatbor/UI/ConfigGroup.uxml";
 
+        readonly IFileBrowser fileBrowser;
         readonly TemplateContainer container;
 
-        public ConfigGroup()
+        public ConfigGroup(IFileBrowser fileBrowser)
         {
+            this.fileBrowser = fileBrowser;
+
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(TemplatePath);
             container = visualTree.Instantiate();
             hierarchy.Add(container);
@@ -37,7 +40,7 @@ namespace Hatbor.UI
 
                 var property = configurableType.GetProperty(p.Name)?.GetValue(configurable);
                 var attr = attributes[0];
-                var (element, disposable) = CreateFieldAndBind(property, attr.Label);
+                var (element, disposable) = CreateFieldAndBind(property, attr);
                 disposable.AddTo(disposables);
                 container.Add(element);
             }
@@ -52,12 +55,13 @@ namespace Hatbor.UI
                 : null;
         }
 
-        static (VisualElement, IDisposable) CreateFieldAndBind(object property, string label)
+        (VisualElement, IDisposable) CreateFieldAndBind(object property, ConfigPropertyAttribute attr)
         {
-            return property switch
+            return (property, attr) switch
             {
-                ReactiveProperty<bool> p => CreateFieldAndBind<Toggle, UnityEngine.UIElements.Toggle, bool>(p, label),
-                ReactiveProperty<int> p => CreateFieldAndBind<IntegerField, UnityEngine.UIElements.IntegerField, int>(p, label),
+                (ReactiveProperty<bool> p, _) => CreateFieldAndBind<Toggle, UnityEngine.UIElements.Toggle, bool>(p, attr.Label),
+                (ReactiveProperty<int> p, _) => CreateFieldAndBind<IntegerField, UnityEngine.UIElements.IntegerField, int>(p, attr.Label),
+                (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) => CreateFilePathFieldAndBind(p, a),
                 _ => throw new ArgumentOutOfRangeException(nameof(property), property, null)
             };
         }
@@ -71,6 +75,15 @@ namespace Hatbor.UI
                 Label = label
             };
             return (propertyField, propertyField.Bind(property));
+        }
+
+        (VisualElement, IDisposable) CreateFilePathFieldAndBind(ReactiveProperty<string> property, FilePathConfigPropertyAttribute attr)
+        {
+            var button = new Button<string>
+            {
+                Label = attr.Label
+            };
+            return (button, button.Bind(property, () => fileBrowser.ChooseFileAsync(attr.Extension)));
         }
     }
 }
