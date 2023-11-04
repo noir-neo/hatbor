@@ -17,6 +17,7 @@
     "com.vrmc.univrm": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM#v0.115.0",
     "com.vrmc.vrm": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM10#v0.115.0",
     "com.vrmc.vrmshaders": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRMShaders#v0.115.0",
+    "io.github.gkngkc.unity-standalone-file-browser": "https://github.com/noir-neo/UnityStandaloneFileBrowser.git?path=Assets/StandaloneFileBrowser",
     "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.2",
     "jp.keijiro.klak.spout": "2.0.3",
     "jp.keijiro.klak.syphon": "0.0.4",

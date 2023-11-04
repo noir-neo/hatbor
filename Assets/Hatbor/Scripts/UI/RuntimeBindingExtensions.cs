@@ -6,7 +6,7 @@ namespace Hatbor.UI
 {
     public static class RuntimeBindingExtensions
     {
-        public static IDisposable Bind<T>(this BaseField<T> field, ReactiveProperty<T> property)
+        public static IDisposable Bind<T>(this INotifyValueChanged<T> field, ReactiveProperty<T> property)
         {
             var disposables = new CompositeDisposable();
 

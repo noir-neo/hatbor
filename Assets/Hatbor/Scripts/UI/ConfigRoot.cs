@@ -12,15 +12,18 @@ namespace Hatbor.UI
     {
         readonly UIDocument uiDocument;
         readonly IEnumerable<IConfigurable> configs;
+        readonly IFileBrowser fileBrowser;
 
         readonly CompositeDisposable disposables = new();
 
         [Inject]
         public ConfigRoot(UIDocument uiDocument,
-            IEnumerable<IConfigurable> configs)
+            IEnumerable<IConfigurable> configs,
+            IFileBrowser fileBrowser)
         {
             this.uiDocument = uiDocument;
             this.configs = configs;
+            this.fileBrowser = fileBrowser;
         }
 
         void IStartable.Start()
@@ -28,7 +31,7 @@ namespace Hatbor.UI
             var container = uiDocument.rootVisualElement;
             foreach (var config in configs)
             {
-                var configGroup = new ConfigGroup();
+                var configGroup = new ConfigGroup(fileBrowser);
                 configGroup.Bind(config).AddTo(disposables);
                 container.Q<VisualElement>("unity-content-container").Add(configGroup);
             }
