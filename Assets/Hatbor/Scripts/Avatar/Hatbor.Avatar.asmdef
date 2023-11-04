@@ -8,7 +8,8 @@
         "VRM10",
         "VRMShaders.GLTF.IO.Runtime",
         "UniGLTF",
-        "Hatbor.Rig"
+        "Hatbor.Rig",
+        "Hatbor.Config"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
