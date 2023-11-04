@@ -212,6 +212,13 @@
       },
       "hash": "7e052b19b3c0b4cd02e63159fc37db820729554e"
     },
+    "io.github.gkngkc.unity-standalone-file-browser": {
+      "version": "https://github.com/noir-neo/UnityStandaloneFileBrowser.git?path=Assets/StandaloneFileBrowser",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "810ed4c083ed7296a9dd652f923d004a8b1bd22f"
+    },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.2",
       "depth": 0,
