@@ -1,11 +1,11 @@
 {
-    "name": "Hatbor.VMC",
-    "rootNamespace": "Hatbor.VMC",
+    "name": "Hatbor.UI",
+    "rootNamespace": "Hatbor.UI",
     "references": [
         "VContainer",
         "UniTask",
         "UniRx",
-        "uOSC.Runtime",
+        "Hatbor.VMC",
         "Hatbor.Config"
     ],
     "includePlatforms": [],
