@@ -9,6 +9,8 @@ namespace Hatbor.Config
     {
         static readonly string DefaultPath = System.IO.Path.Combine(Application.streamingAssetsPath, "avatar.vrm");
 
+        public string PersistentKey => "AvatarConfig";
+
         [SerializeField] StringReactiveProperty path = new(DefaultPath);
 
         [FilePathConfigProperty("Choose Avatar", "vrm")]

@@ -15,6 +15,7 @@ namespace Hatbor.LifetimeScope
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterEntryPoint<ConfigStore>();
             builder.Register<IConfigurable, VmcServerConfig>(Lifetime.Singleton).AsSelf();
             builder.RegisterEntryPoint<VmcServer>(Lifetime.Singleton).AsSelf();
 
