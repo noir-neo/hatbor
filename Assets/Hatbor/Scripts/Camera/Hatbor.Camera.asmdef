@@ -1,20 +1,21 @@
 {
-  "name": "Hatbor.Camera",
-  "rootNamespace": "Hatbor.Camera",
-  "references": [
-    "VContainer",
-    "UniTask",
-    "UniRx",
-    "Hatbor.Rig",
-    "Hatbor.Config"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "Hatbor.Camera",
+    "rootNamespace": "Hatbor.Camera",
+    "references": [
+        "VContainer",
+        "UniTask",
+        "UniRx",
+        "Hatbor.Rig",
+        "Hatbor.Config",
+        "Unity.RenderPipelines.Universal.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
