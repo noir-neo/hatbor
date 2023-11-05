@@ -59,6 +59,7 @@ namespace Hatbor.VMC
 
         void IDisposable.Dispose()
         {
+            StopServer();
             disposables.Dispose();
         }
 
