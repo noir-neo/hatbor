@@ -3,6 +3,7 @@ using System.Reflection;
 using Hatbor.Config;
 using UniRx;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Hatbor.UI
@@ -59,16 +60,17 @@ namespace Hatbor.UI
         {
             return (property, attr) switch
             {
-                (ReactiveProperty<bool> p, _) => CreateFieldAndBind<Toggle, UnityEngine.UIElements.Toggle, bool>(p, attr.Label),
-                (ReactiveProperty<int> p, _) => CreateFieldAndBind<IntegerField, UnityEngine.UIElements.IntegerField, int>(p, attr.Label),
+                (ReactiveProperty<bool> p, _) => CreateFieldAndBind<bool, Toggle, UnityEngine.UIElements.Toggle>(p, attr.Label),
+                (ReactiveProperty<int> p, _) => CreateFieldAndBind<int, IntegerField, UnityEngine.UIElements.IntegerField>(p, attr.Label),
+                (ReactiveProperty<Vector2Int> p, _) => CreateFieldAndBind<Vector2Int, Vector2IntField, UnityEngine.UIElements.Vector2IntField>(p, attr.Label),
                 (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) => CreateFilePathFieldAndBind(p, a),
                 _ => throw new ArgumentOutOfRangeException(nameof(property), property, null)
             };
         }
 
-        static (VisualElement, IDisposable) CreateFieldAndBind<TPropertyField, TField, TProperty>(ReactiveProperty<TProperty> property, string label)
-            where TPropertyField : PropertyField<TField, TProperty>, new()
-            where TField : BaseField<TProperty>
+        static (VisualElement, IDisposable) CreateFieldAndBind<TValueType, TPropertyField, TField>(ReactiveProperty<TValueType> property, string label)
+            where TPropertyField : PropertyField<TValueType, TField>, new()
+            where TField : BaseField<TValueType>
         {
             var propertyField = new TPropertyField
             {
