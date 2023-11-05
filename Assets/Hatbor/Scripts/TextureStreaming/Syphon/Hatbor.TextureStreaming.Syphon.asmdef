@@ -1,20 +1,12 @@
 {
-  "name": "Hatbor.LifetimeScope",
-  "rootNamespace": "Hatbor.LifetimeScope",
+  "name": "Hatbor.TextureStreaming.Syphon",
+  "rootNamespace": "Hatbor.TextureStreaming.Syphon",
   "references": [
     "VContainer",
     "UniTask",
     "UniRx",
-    "Hatbor.Avatar",
-    "Hatbor.VMC",
-    "Hatbor.Rig.VMC",
-    "Hatbor.Rig",
-    "Hatbor.Camera",
-    "Hatbor.Config",
-    "Hatbor.UI",
-    "Hatbor.FileBrowser",
-    "Hatbor.TextureStreaming",
-    "Hatbor.TextureStreaming.Syphon"
+    "Klak.Syphon.Runtime",
+    "Hatbor.TextureStreaming"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

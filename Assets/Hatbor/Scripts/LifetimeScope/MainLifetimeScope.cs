@@ -3,6 +3,8 @@ using Hatbor.Camera;
 using Hatbor.Rig;
 using Hatbor.Rig.VMC;
 using Hatbor.Config;
+using Hatbor.TextureStreaming;
+using Hatbor.TextureStreaming.Syphon;
 using Hatbor.VMC;
 using VContainer;
 using VContainer.Unity;
@@ -29,6 +31,11 @@ namespace Hatbor.LifetimeScope
 
             builder.Register<IConfigurable, RenderConfig>(Lifetime.Singleton).AsSelf();
             builder.RegisterEntryPoint<RenderTextureProvider>(Lifetime.Singleton).AsSelf();
+
+#if UNITY_STANDALONE_OSX
+            builder.Register<ITextureSender, SyphonSender>(Lifetime.Singleton);
+#endif
+            builder.RegisterEntryPoint<TextureStreamingSender>(Lifetime.Singleton);
         }
     }
 }
