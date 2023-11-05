@@ -1,9 +1,9 @@
 using Hatbor.Avatar;
+using Hatbor.Camera;
 using Hatbor.Rig;
 using Hatbor.Rig.VMC;
 using Hatbor.Config;
 using Hatbor.VMC;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,8 +11,6 @@ namespace Hatbor.LifetimeScope
 {
     public sealed class MainLifetimeScope : VContainer.Unity.LifetimeScope
     {
-        [SerializeField] UnityEngine.Camera mainCamera;
-
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<ConfigStore>();
@@ -30,8 +28,7 @@ namespace Hatbor.LifetimeScope
             builder.RegisterEntryPoint<AvatarLoader>(Lifetime.Singleton);
 
             builder.Register<IConfigurable, RenderConfig>(Lifetime.Singleton).AsSelf();
-            builder.RegisterInstance(mainCamera);
-            builder.RegisterEntryPoint<Camera.Camera>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<RenderTextureProvider>(Lifetime.Singleton).AsSelf();
         }
     }
 }

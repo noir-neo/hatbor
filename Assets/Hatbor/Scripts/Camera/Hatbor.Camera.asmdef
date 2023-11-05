@@ -5,7 +5,8 @@
     "VContainer",
     "UniTask",
     "UniRx",
-    "Hatbor.Rig"
+    "Hatbor.Rig",
+    "Hatbor.Config"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
