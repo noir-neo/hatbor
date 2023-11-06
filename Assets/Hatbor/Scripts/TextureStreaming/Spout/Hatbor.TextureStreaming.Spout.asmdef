@@ -1,0 +1,20 @@
+{
+    "name": "Hatbor.TextureStreaming.Spout",
+    "rootNamespace": "Hatbor.TextureStreaming.Spout",
+    "references": [
+        "VContainer",
+        "UniTask",
+        "UniRx",
+        "Klak.Spout.Runtime",
+        "Hatbor.TextureStreaming"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

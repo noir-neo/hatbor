@@ -4,6 +4,7 @@ using Hatbor.Rig;
 using Hatbor.Rig.VMC;
 using Hatbor.Config;
 using Hatbor.TextureStreaming;
+using Hatbor.TextureStreaming.Spout;
 using Hatbor.TextureStreaming.Syphon;
 using Hatbor.VMC;
 using VContainer;
@@ -34,6 +35,8 @@ namespace Hatbor.LifetimeScope
 
 #if UNITY_STANDALONE_OSX
             builder.Register<ITextureSender, SyphonSender>(Lifetime.Singleton);
+#elif UNITY_STANDALONE_WIN
+            builder.Register<ITextureSender, SpoutSender>(Lifetime.Singleton);
 #endif
             builder.RegisterEntryPoint<TextureStreamingSender>(Lifetime.Singleton);
         }

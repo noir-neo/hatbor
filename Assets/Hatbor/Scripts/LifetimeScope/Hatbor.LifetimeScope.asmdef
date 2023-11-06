@@ -14,7 +14,8 @@
     "Hatbor.UI",
     "Hatbor.FileBrowser",
     "Hatbor.TextureStreaming",
-    "Hatbor.TextureStreaming.Syphon"
+    "Hatbor.TextureStreaming.Syphon",
+    "Hatbor.TextureStreaming.Spout"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
