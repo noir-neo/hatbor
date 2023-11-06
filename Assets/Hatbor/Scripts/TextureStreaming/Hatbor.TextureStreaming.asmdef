@@ -1,21 +1,12 @@
 {
-  "name": "Hatbor.LifetimeScope",
-  "rootNamespace": "Hatbor.LifetimeScope",
+  "name": "Hatbor.TextureStreaming",
+  "rootNamespace": "Hatbor.TextureStreaming",
   "references": [
     "VContainer",
     "UniTask",
     "UniRx",
-    "Hatbor.Avatar",
-    "Hatbor.VMC",
-    "Hatbor.Rig.VMC",
-    "Hatbor.Rig",
-    "Hatbor.Camera",
     "Hatbor.Config",
-    "Hatbor.UI",
-    "Hatbor.FileBrowser",
-    "Hatbor.TextureStreaming",
-    "Hatbor.TextureStreaming.Syphon",
-    "Hatbor.TextureStreaming.Spout"
+    "Hatbor.Camera"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

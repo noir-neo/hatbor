@@ -1,13 +1,12 @@
 {
-    "name": "Hatbor.Camera",
-    "rootNamespace": "Hatbor.Camera",
+    "name": "Hatbor.TextureStreaming.Spout",
+    "rootNamespace": "Hatbor.TextureStreaming.Spout",
     "references": [
         "VContainer",
         "UniTask",
         "UniRx",
-        "Hatbor.Rig",
-        "Hatbor.Config",
-        "Unity.RenderPipelines.Universal.Runtime"
+        "Klak.Spout.Runtime",
+        "Hatbor.TextureStreaming"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

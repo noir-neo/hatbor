@@ -1,0 +1,20 @@
+{
+  "name": "Hatbor.TextureStreaming.Syphon",
+  "rootNamespace": "Hatbor.TextureStreaming.Syphon",
+  "references": [
+    "VContainer",
+    "UniTask",
+    "UniRx",
+    "Klak.Syphon.Runtime",
+    "Hatbor.TextureStreaming"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
