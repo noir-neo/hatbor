@@ -1,16 +1,13 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UniRx;
-using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace Hatbor.UI
 {
     public sealed class Button<T> : VisualElement
     {
-        static string TemplatePath => @"Assets/Hatbor/UI/Button.uxml";
-
-        readonly UnityEngine.UIElements.Button button;
+        readonly Button button;
 
         public string Label
         {
@@ -20,10 +17,8 @@ namespace Hatbor.UI
 
         public Button()
         {
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(TemplatePath);
-            var container = visualTree.Instantiate();
-            hierarchy.Add(container);
-            button = container.Q<UnityEngine.UIElements.Button>();
+            button = new Button();
+            hierarchy.Add(button);
         }
 
         public IDisposable Bind(ReactiveProperty<T> property, Func<T> onClicked)
