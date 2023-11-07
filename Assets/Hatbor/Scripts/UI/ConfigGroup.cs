@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using Hatbor.Config;
 using UniRx;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,17 +9,18 @@ namespace Hatbor.UI
 {
     public sealed class ConfigGroup : VisualElement
     {
-        const string TemplatePath = "Assets/Hatbor/UI/ConfigGroup.uxml";
-
         readonly IFileBrowser fileBrowser;
-        readonly TemplateContainer container;
+
+        readonly Label label;
+        readonly VisualElement container;
 
         public ConfigGroup(IFileBrowser fileBrowser)
         {
             this.fileBrowser = fileBrowser;
 
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(TemplatePath);
-            container = visualTree.Instantiate();
+            label = new Label();
+            hierarchy.Add(label);
+            container = new VisualElement();
             hierarchy.Add(container);
         }
 
@@ -28,7 +28,6 @@ namespace Hatbor.UI
         {
             var configurableType = configurable.GetType();
 
-            var label = container.Q<Label>();
             label.text = GetConfigGroupAttribute(configurableType).Label;
 
             var disposables = new CompositeDisposable();
@@ -60,19 +59,23 @@ namespace Hatbor.UI
         {
             return (property, attr) switch
             {
-                (ReactiveProperty<bool> p, _) => CreateFieldAndBind<bool, Toggle, UnityEngine.UIElements.Toggle>(p, attr.Label),
-                (ReactiveProperty<int> p, _) => CreateFieldAndBind<int, IntegerField, UnityEngine.UIElements.IntegerField>(p, attr.Label),
-                (ReactiveProperty<Vector2Int> p, _) => CreateFieldAndBind<Vector2Int, Vector2IntField, UnityEngine.UIElements.Vector2IntField>(p, attr.Label),
-                (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) => CreateFilePathFieldAndBind(p, a),
+                (ReactiveProperty<bool> p, _) =>
+                    CreateFieldAndBind<bool, Toggle>(p, attr.Label),
+                (ReactiveProperty<int> p, _) =>
+                    CreateFieldAndBind<int, IntegerField>(p, attr.Label),
+                (ReactiveProperty<Vector2Int> p, _) =>
+                    CreateFieldAndBind<Vector2Int, Vector2IntField>(p, attr.Label),
+                (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) =>
+                    CreateFilePathFieldAndBind(p, a),
                 _ => throw new ArgumentOutOfRangeException(nameof(property), property, null)
             };
         }
 
-        static (VisualElement, IDisposable) CreateFieldAndBind<TValueType, TPropertyField, TField>(ReactiveProperty<TValueType> property, string label)
-            where TPropertyField : PropertyField<TValueType, TField>, new()
-            where TField : BaseField<TValueType>
+        static (VisualElement, IDisposable) CreateFieldAndBind<TValueType, TField>(
+            ReactiveProperty<TValueType> property, string label)
+            where TField : BaseField<TValueType>, new()
         {
-            var propertyField = new TPropertyField
+            var propertyField = new PropertyField<TValueType, TField>
             {
                 Label = label
             };

@@ -1,14 +1,11 @@
 using System;
 using UniRx;
-using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace Hatbor.UI
 {
-    public class PropertyField<TValueType, TField> : VisualElement where TField : BaseField<TValueType>
+    public class PropertyField<TValueType, TField> : VisualElement where TField : BaseField<TValueType>, new()
     {
-        protected virtual string TemplatePath { get; }
-
         readonly TField field;
 
         public string Label
@@ -19,10 +16,8 @@ namespace Hatbor.UI
 
         public PropertyField()
         {
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(TemplatePath);
-            var container = visualTree.Instantiate();
-            hierarchy.Add(container);
-            field = container.Q<TField>();
+            field = new TField();
+            hierarchy.Add(field);
         }
 
         public IDisposable Bind(ReactiveProperty<TValueType> property)
@@ -32,7 +27,7 @@ namespace Hatbor.UI
     }
 
     public class PropertyField<TValueType, TCompositeField, TField, TFieldValue> : PropertyField<TValueType, TCompositeField>
-        where TCompositeField : BaseCompositeField<TValueType, TField, TFieldValue>
+        where TCompositeField : BaseCompositeField<TValueType, TField, TFieldValue>, new()
         where TField : TextValueField<TFieldValue>, new()
     {
     }
