@@ -1,3 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
-</ui:UXML>
