@@ -1,5 +1,5 @@
 using System;
-using System.Numerics;
+using Hatbor.Config;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,16 +11,22 @@ namespace Hatbor.Camera
 {
     public sealed class CameraCanvas : IStartable, IDisposable
     {
+        static readonly Rect UVDefault = new(0, 0, 1, 1);
+        static readonly Rect UVMirror = new(1, 0, -1, 1);
+
         readonly RenderTextureProvider renderTextureProvider;
+        readonly RenderConfig renderConfig;
         readonly RawImage rawImage;
 
         readonly CompositeDisposable disposables = new();
 
         [Inject]
         public CameraCanvas(RenderTextureProvider renderTextureProvider,
+            RenderConfig renderConfig,
             RawImage rawImage)
         {
             this.renderTextureProvider = renderTextureProvider;
+            this.renderConfig = renderConfig;
             this.rawImage = rawImage;
         }
 
@@ -35,6 +41,11 @@ namespace Hatbor.Camera
                     (parentSize, textureSize) => (parentSize, textureSize))
                 .Select(t => CalcCoveredSize(t.parentSize, t.textureSize))
                 .Subscribe(size => rawImage.rectTransform.sizeDelta = size)
+                .AddTo(disposables);
+
+            renderConfig.MirrorPreview
+                .Select(b => b ? UVMirror : UVDefault)
+                .Subscribe(uv => rawImage.uvRect = uv)
                 .AddTo(disposables);
         }
 
