@@ -12,6 +12,7 @@ namespace Hatbor.Config
         [SerializeField] Vector2IntReactiveProperty size = new(new Vector2Int(1920, 1080));
         [SerializeField] BoolReactiveProperty enabledSharingTexture = new(true);
         [SerializeField] BoolReactiveProperty transparentBackground = new(true);
+        [SerializeField] BoolReactiveProperty mirrorPreview = new(true);
 
         [ConfigProperty("Size")]
         public ReactiveProperty<Vector2Int> Size => size;
@@ -23,5 +24,7 @@ namespace Hatbor.Config
         public ReactiveProperty<bool> EnabledSharingTexture => enabledSharingTexture;
         [ConfigProperty("Transparent Background")]
         public ReactiveProperty<bool> TransparentBackground => transparentBackground;
+        [ConfigProperty("Mirror Preview")]
+        public ReactiveProperty<bool> MirrorPreview => mirrorPreview;
     }
 }
