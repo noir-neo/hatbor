@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Hatbor.Rig;
 using UniRx;
 using VContainer;
@@ -9,18 +11,18 @@ namespace Hatbor.Camera
     public sealed class Camera : IStartable, ITickable, IDisposable
     {
         readonly UnityEngine.Camera mainCamera;
-        readonly ICameraRig cameraRig;
+        readonly IEnumerable<ICameraRig> cameraRigs;
         readonly RenderTextureProvider renderTextureProvider;
 
         readonly CompositeDisposable disposables = new();
 
         [Inject]
         public Camera(UnityEngine.Camera mainCamera,
-            ICameraRig cameraRig,
+            IEnumerable<ICameraRig> cameraRigs,
             RenderTextureProvider renderTextureProvider)
         {
             this.mainCamera = mainCamera;
-            this.cameraRig = cameraRig;
+            this.cameraRigs = cameraRigs;
             this.renderTextureProvider = renderTextureProvider;
         }
 
@@ -35,7 +37,12 @@ namespace Hatbor.Camera
 
         void ITickable.Tick()
         {
-            cameraRig.Update(mainCamera);
+            foreach (var cameraRig in cameraRigs
+                         .Where(c => c.Enabled)
+                         .OrderBy(c => c.Order))
+            {
+                cameraRig.Update(mainCamera);
+            }
         }
 
         void IDisposable.Dispose()
