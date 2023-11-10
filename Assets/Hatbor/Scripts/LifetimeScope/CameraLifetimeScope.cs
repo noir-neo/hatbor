@@ -1,4 +1,5 @@
 using Hatbor.Camera;
+using Hatbor.TextureStreaming;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -15,6 +16,18 @@ namespace Hatbor.LifetimeScope
         {
             builder.RegisterInstance(mainCamera);
             builder.RegisterInstance(rawImage);
+
+            builder.RegisterEntryPoint<RenderTextureProvider>(Lifetime.Singleton).AsSelf();
+
+#if UNITY_STANDALONE_OSX
+            builder.Register<ITextureSender, TextureStreaming.Syphon.SyphonSender>(Lifetime.Singleton);
+#elif UNITY_STANDALONE_WIN
+            builder.Register<ITextureSender, TextureStreaming.Spout.SpoutSender>(Lifetime.Singleton);
+#endif
+            builder.RegisterEntryPoint<TextureStreamingSender>(Lifetime.Singleton);
+
+            builder.RegisterEntryPoint<FixedCameraController>(Lifetime.Singleton);
+
             builder.RegisterEntryPoint<Camera.Camera>(Lifetime.Singleton);
             builder.RegisterEntryPoint<CameraCanvas>(Lifetime.Singleton);
         }

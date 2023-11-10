@@ -1,10 +1,8 @@
 using Hatbor.Avatar;
-using Hatbor.Camera;
 using Hatbor.Rig;
 using Hatbor.Rig.VMC;
 using Hatbor.Config;
 using Hatbor.Rig.Fixed;
-using Hatbor.TextureStreaming;
 using Hatbor.VMC;
 using VContainer;
 using VContainer.Unity;
@@ -35,16 +33,6 @@ namespace Hatbor.LifetimeScope
             // Avatar
             builder.Register<AvatarRig>(Lifetime.Singleton);
             builder.RegisterEntryPoint<AvatarLoader>(Lifetime.Singleton);
-
-            // Camera
-            builder.RegisterEntryPoint<RenderTextureProvider>(Lifetime.Singleton).AsSelf();
-
-#if UNITY_STANDALONE_OSX
-            builder.Register<ITextureSender, TextureStreaming.Syphon.SyphonSender>(Lifetime.Singleton);
-#elif UNITY_STANDALONE_WIN
-            builder.Register<ITextureSender, TextureStreaming.Spout.SpoutSender>(Lifetime.Singleton);
-#endif
-            builder.RegisterEntryPoint<TextureStreamingSender>(Lifetime.Singleton);
         }
     }
 }
