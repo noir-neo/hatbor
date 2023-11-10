@@ -61,10 +61,14 @@ namespace Hatbor.UI
             {
                 (ReactiveProperty<bool> p, _) =>
                     CreateFieldAndBind<bool, Toggle>(p, attr.Label),
+                (ReactiveProperty<float> p, _) =>
+                    CreateFieldAndBind<float, FloatField>(p, attr.Label),
                 (ReactiveProperty<int> p, _) =>
                     CreateFieldAndBind<int, IntegerField>(p, attr.Label),
                 (ReactiveProperty<Vector2Int> p, _) =>
                     CreateFieldAndBind<Vector2Int, Vector2IntField>(p, attr.Label),
+                (ReactiveProperty<Vector3> p, _) =>
+                    CreateFieldAndBind<Vector3, Vector3Field>(p, attr.Label),
                 (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) =>
                     CreateFilePathFieldAndBind(p, a),
                 _ => throw new ArgumentOutOfRangeException(nameof(property), property, null)

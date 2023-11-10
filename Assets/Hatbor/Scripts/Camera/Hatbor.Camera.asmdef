@@ -7,7 +7,9 @@
         "UniRx",
         "Hatbor.Rig",
         "Hatbor.Config",
-        "Unity.RenderPipelines.Universal.Runtime"
+        "Hatbor.HID",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

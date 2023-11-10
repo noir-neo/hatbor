@@ -8,6 +8,10 @@ namespace Hatbor.Rig.VMC
     {
         readonly VmcServer vmcServer;
 
+        // TODO: Make configurable
+        public bool Enabled => true;
+        public int Order => 0;
+
         [Inject]
         public VmcCameraRig(VmcServer vmcServer)
         {

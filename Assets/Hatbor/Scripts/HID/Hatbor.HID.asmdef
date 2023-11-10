@@ -1,0 +1,20 @@
+{
+  "name": "Hatbor.HID",
+  "rootNamespace": "Hatbor.HID",
+  "references": [
+    "VContainer",
+    "UniTask",
+    "UniRx",
+    "Hatbor.Config",
+    "Unity.InputSystem"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
