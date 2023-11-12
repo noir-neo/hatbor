@@ -1,0 +1,19 @@
+{
+  "name": "Hatbor.Light",
+  "rootNamespace": "Hatbor.Light",
+  "references": [
+    "VContainer",
+    "UniTask",
+    "UniRx",
+    "Hatbor.Config"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

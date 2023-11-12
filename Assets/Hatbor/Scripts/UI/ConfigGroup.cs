@@ -69,6 +69,8 @@ namespace Hatbor.UI
                     CreateFieldAndBind<Vector2Int, Vector2IntField>(p, attr.Label),
                 (ReactiveProperty<Vector3> p, _) =>
                     CreateFieldAndBind<Vector3, Vector3Field>(p, attr.Label),
+                (ReactiveProperty<Color> p, _) =>
+                    CreateColorFieldAndBind(p, attr.Label),
                 (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) =>
                     CreateFilePathFieldAndBind(p, a),
                 _ => throw new ArgumentOutOfRangeException(nameof(property), property, null)
@@ -84,6 +86,15 @@ namespace Hatbor.UI
                 Label = label
             };
             return (propertyField, propertyField.Bind(property));
+        }
+
+        static (VisualElement, IDisposable) CreateColorFieldAndBind(ReactiveProperty<Color> property, string label)
+        {
+            var colorField = new ColorField
+            {
+                Label = label
+            };
+            return (colorField, colorField.Bind(property));
         }
 
         (VisualElement, IDisposable) CreateFilePathFieldAndBind(ReactiveProperty<string> property, FilePathConfigPropertyAttribute attr)
