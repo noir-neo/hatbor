@@ -17,7 +17,8 @@
     "Hatbor.TextureStreaming.Syphon",
     "Hatbor.TextureStreaming.Spout",
     "Hatbor.Rig.Fixed",
-    "Hatbor.HID"
+    "Hatbor.HID",
+    "Hatbor.Light"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

@@ -6,7 +6,7 @@ namespace Hatbor.UI
 {
     public class PropertyField<TValueType, TField> : VisualElement where TField : BaseField<TValueType>, new()
     {
-        readonly TField field;
+        protected readonly TField field;
 
         public string Label
         {
