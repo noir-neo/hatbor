@@ -1,9 +1,10 @@
 using System;
+using UnityEngine.Scripting;
 
 namespace Hatbor.Config
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class ConfigPropertyAttribute : Attribute
+    public class ConfigPropertyAttribute : PreserveAttribute
     {
         public string Label { get; }
 

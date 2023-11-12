@@ -34,6 +34,7 @@ namespace Hatbor.Config
 
         static void Load(IConfigurable configurable)
         {
+            if (string.IsNullOrEmpty(configurable.PersistentKey)) return;
             var json = PlayerPrefs.GetString(configurable.PersistentKey);
             if (!string.IsNullOrEmpty(json))
             {
@@ -43,6 +44,7 @@ namespace Hatbor.Config
 
         static void Save(IConfigurable configurable)
         {
+            if (string.IsNullOrEmpty(configurable.PersistentKey)) return;
             var json = JsonUtility.ToJson(configurable);
             PlayerPrefs.SetString(configurable.PersistentKey, json);
         }

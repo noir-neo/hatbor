@@ -24,18 +24,14 @@ namespace Hatbor.UI
         public IDisposable Bind(ReactiveProperty<T> property, Func<T> onClicked)
         {
 
-            return Observable.FromEvent(
-                h => button.clickable.clicked += h,
-                h => button.clickable.clicked -= h
-            ).Subscribe(_ => property.Value = onClicked());
+            return button.OnClickAsObservable()
+                .Subscribe(_ => property.Value = onClicked());
         }
 
         public IDisposable Bind(ReactiveProperty<T> property, Func<UniTask<T>> onClicked)
         {
-            return Observable.FromEvent(
-                h => button.clickable.clicked += h,
-                h => button.clickable.clicked -= h
-                ).Subscribe(_ =>
+            return button.OnClickAsObservable()
+                .Subscribe(_ =>
                     UniTask.Void(async () =>
                     {
                         var v = await onClicked();
