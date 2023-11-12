@@ -28,12 +28,13 @@ namespace Hatbor.UI
 
         void IStartable.Start()
         {
-            var container = uiDocument.rootVisualElement;
+            var root = uiDocument.rootVisualElement;
+            var container = root.Q<VisualElement>("unity-content-container");
             foreach (var config in configs)
             {
                 var configGroup = new ConfigGroup(fileBrowser);
                 configGroup.Bind(config).AddTo(disposables);
-                container.Q<VisualElement>("unity-content-container").Add(configGroup);
+                container.Add(configGroup);
             }
         }
 
