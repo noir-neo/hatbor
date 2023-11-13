@@ -279,6 +279,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   mainCamera: {fileID: 1142972766}
   rawImage: {fileID: 1949967038}
+  spoutResources: {fileID: 11400000, guid: 8fbbd23eb3aa34bdfbf1d01b9f25208c, type: 2}
 --- !u!4 &352199546
 Transform:
   m_ObjectHideFlags: 0

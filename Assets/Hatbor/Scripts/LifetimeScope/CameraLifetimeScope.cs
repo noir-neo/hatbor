@@ -1,5 +1,6 @@
 using Hatbor.Camera;
 using Hatbor.TextureStreaming;
+using Klak.Spout;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -11,6 +12,7 @@ namespace Hatbor.LifetimeScope
     {
         [SerializeField] UnityEngine.Camera mainCamera;
         [SerializeField] RawImage rawImage;
+        [SerializeField] SpoutResources spoutResources;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -22,6 +24,7 @@ namespace Hatbor.LifetimeScope
 #if UNITY_STANDALONE_OSX
             builder.Register<ITextureSender, TextureStreaming.Syphon.SyphonSender>(Lifetime.Singleton);
 #elif UNITY_STANDALONE_WIN
+            builder.RegisterInstance(spoutResources);
             builder.Register<ITextureSender, TextureStreaming.Spout.SpoutSender>(Lifetime.Singleton);
 #endif
             builder.RegisterEntryPoint<TextureStreamingSender>(Lifetime.Singleton);
