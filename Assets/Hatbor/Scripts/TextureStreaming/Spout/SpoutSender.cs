@@ -1,6 +1,7 @@
 using System;
 using Klak.Spout;
 using UnityEngine;
+using VContainer;
 using Object = UnityEngine.Object;
 
 namespace Hatbor.TextureStreaming.Spout
@@ -8,7 +9,7 @@ namespace Hatbor.TextureStreaming.Spout
     public sealed class SpoutSender : ITextureSender
     {
         Klak.Spout.SpoutSender sender;
-        SpoutResources resources;
+        readonly SpoutResources resources;
 
         void IDisposable.Dispose()
         {
@@ -16,11 +17,6 @@ namespace Hatbor.TextureStreaming.Spout
             {
                 Object.Destroy(sender);
                 sender = null;
-            }
-            if (resources != null)
-            {
-                Object.Destroy(resources);
-                resources = null;
             }
         }
 
@@ -40,15 +36,14 @@ namespace Hatbor.TextureStreaming.Spout
 
         public bool IsRunning => sender != null && sender.enabled;
 
+        [Inject]
+        public SpoutSender(SpoutResources resources)
+        {
+            this.resources = resources;
+        }
+
         void ITextureSender.StartServer(string name, int width, int height, TextureFormat format)
         {
-            if (resources == null)
-            {
-                resources = ScriptableObject.CreateInstance<SpoutResources>();
-                resources.hideFlags = HideFlags.DontSave;
-                resources.blitShader = Shader.Find("Hidden/Klak/Spout/Blit");
-            }
-
             if (sender == null)
             {
                 sender = new GameObject("SpoutSender").AddComponent<Klak.Spout.SpoutSender>();
