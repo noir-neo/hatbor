@@ -20,6 +20,7 @@ namespace Hatbor.LifetimeScope
             builder.Register<IConfigurable, AvatarConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, RenderConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, LightConfig>(Lifetime.Singleton).AsSelf();
+            builder.Register<IConfigurable, MiscConfig>(Lifetime.Singleton).AsSelf();
 
             // Rig/VMC
             builder.RegisterEntryPoint<VmcServer>(Lifetime.Singleton).AsSelf();

@@ -73,6 +73,8 @@ namespace Hatbor.UI
                     CreateColorFieldAndBind(p, attr.Label),
                 (ReactiveProperty<string> p, FilePathConfigPropertyAttribute a) =>
                     CreateFilePathFieldAndBind(p, a),
+                (Action p, _) =>
+                    CreateButtonAndRegister(p, attr),
                 _ => throw new ArgumentOutOfRangeException(nameof(property), property, null)
             };
         }
@@ -104,6 +106,16 @@ namespace Hatbor.UI
                 Label = attr.Label
             };
             return (button, button.Bind(property, () => fileBrowser.ChooseFileAsync(attr.Extension)));
+        }
+
+        static (VisualElement, IDisposable) CreateButtonAndRegister(Action onClicked, ConfigPropertyAttribute attr)
+        {
+            var button = new Button
+            {
+                text = attr.Label
+            };
+            var disposable = button.OnClickAsObservable().Subscribe(_ => onClicked());
+            return (button, disposable);
         }
     }
 }
