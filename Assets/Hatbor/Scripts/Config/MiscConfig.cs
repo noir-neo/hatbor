@@ -1,6 +1,5 @@
 using System;
-using System.IO;
-using UnityEngine;
+using UniRx;
 
 namespace Hatbor.Config
 {
@@ -10,13 +9,13 @@ namespace Hatbor.Config
         // This config group should not persist
         public string PersistentKey { get; }
 
+        public ReactiveProperty<bool> LegalNotices { get; } = new(false);
+
         [ConfigProperty("Legal notices")]
         public Action OpenLegalNotices => OpenLegalNoticesInternal;
-
-        static void OpenLegalNoticesInternal()
+        void OpenLegalNoticesInternal()
         {
-            var path = Path.Combine(Application.streamingAssetsPath, "THIRD-PARTY-NOTICES.txt");
-            System.Diagnostics.Process.Start(path);
+            LegalNotices.Value = true;
         }
     }
 }
