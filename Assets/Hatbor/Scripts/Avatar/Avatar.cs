@@ -26,10 +26,7 @@ namespace Hatbor.Avatar
         async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
             instance = await LoadAsync(path, cancellation);
-            // Runtime の生成より前に instance.transform を動かすと ControlRig がズレる (UniVRM v0.115.0)
-            // ので、とりあえず初期化しておく
-            _ = instance.Runtime;
-            rig.Update(instance);
+            rig.Initialize(instance);
         }
 
         void ITickable.Tick()

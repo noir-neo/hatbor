@@ -19,6 +19,13 @@ namespace Hatbor.Rig
             this.expressionRig = expressionRig;
         }
 
+        public void Initialize(Vrm10Instance instance)
+        {
+            // NOTE: Runtime の生成より前に instance.transform を動かすと ControlRig がズレる (UniVRM v0.115.0)
+            // ので、とりあえず初期化しておく必要あり
+            var runtime = instance.Runtime;
+        }
+
         public void Update(Vrm10Instance instance)
         {
             rootTransformRig.Update(instance.transform);
