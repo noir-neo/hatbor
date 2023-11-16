@@ -56,7 +56,11 @@ jobs:
             --options runtime \
             --entitlements "${PROJECT_NAME}.entitlements" \
             --sign "Developer ID Application: ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
+
+      - name: Tar files
+        run: tar -cvf build.tar build/StandaloneOSX
+
       - uses: actions/upload-artifact@v3
         with:
           name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
-          path: build
+          path: build.tar
