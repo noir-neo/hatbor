@@ -43,7 +43,7 @@ jobs:
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_TEAM_NAME: ${{ secrets.APPLE_TEAM_NAME }}
-          MAC_BUILD_PATH: ${{ format('{0}/build', github.workspace) }}
+          MAC_BUILD_PATH: ${{ format('{0}/build/StandaloneOSX', github.workspace) }}
           PROJECT_NAME: hatbor
         run: |
           chmod -R a+xr "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
@@ -59,4 +59,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
-          path: build
+          path: build/StandaloneOSX
