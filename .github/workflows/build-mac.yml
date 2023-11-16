@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build for mac
+    name: Build for StandaloneOSX
     runs-on: macos-latest
 
     steps:
@@ -55,7 +55,7 @@ jobs:
             --timestamp \
             --options runtime \
             --entitlements "${PROJECT_NAME}.entitlements" \
-            --sign "Developer ID Application : ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
+            --sign "Developer ID Application: ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
       - uses: actions/upload-artifact@v3
         with:
           name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
