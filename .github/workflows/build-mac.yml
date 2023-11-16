@@ -58,7 +58,7 @@ jobs:
             --sign "Developer ID Application: ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
 
       - name: Tar files
-        run: tar -cvf build.tar build/StandaloneOSX
+        run: tar -cvf build.tar -C build/StandaloneOSX hatbor.app
 
       - uses: actions/upload-artifact@v3
         with:
