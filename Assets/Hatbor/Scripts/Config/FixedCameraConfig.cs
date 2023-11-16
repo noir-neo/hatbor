@@ -12,9 +12,9 @@ namespace Hatbor.Config
         [SerializeField]
         BoolReactiveProperty enabled = new(false);
         [SerializeField]
-        Vector3ReactiveProperty cameraPosition = new (new Vector3(0f, 0f, -10f));
+        Vector3ReactiveProperty cameraPosition = new (Vector3.zero);
         [SerializeField]
-        Vector3ReactiveProperty cameraRotation = new ();
+        Vector3ReactiveProperty cameraRotation = new (new Vector3(0f, 180f, 0f));
         [SerializeField]
         FloatReactiveProperty fieldOfView = new (30f);
 
