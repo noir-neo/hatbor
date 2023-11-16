@@ -9,32 +9,27 @@ jobs:
   build:
     name: Build for mac
     runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        targetPlatform:
-          - StandaloneOSX
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: actions/cache@v3
         with:
           path: Library
-          key: Library-${{ matrix.targetPlatform }}
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
 
       - name: Build project
-        uses: game-ci/unity-builder@v3
+        uses: game-ci/unity-builder@v4
         id: buildStep
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: ${{ matrix.targetPlatform }}
+          targetPlatform: StandaloneOSX
           buildName: hatbor
           versioning: Semantic
 
@@ -48,20 +43,20 @@ jobs:
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_TEAM_NAME: ${{ secrets.APPLE_TEAM_NAME }}
-          MAC_BUILD_PATH: ${{ format('{0}/build/{1}', github.workspace, matrix.targetPlatform) }}
+          MAC_BUILD_PATH: ${{ format('{0}/build', github.workspace) }}
           PROJECT_NAME: hatbor
         run: |
           chmod -R a+xr "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
-          codesign 
-              --deep 
-              --force 
-              --verify 
-              --verbose 
-              --timestamp 
-              --options runtime 
-              --entitlements "${PROJECT_NAME}.entitlements" 
-              --sign "Developer ID Application : ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
+          codesign \
+            --deep \
+            --force \
+            --verify \
+            --verbose \
+            --timestamp \
+            --options runtime \
+            --entitlements "${PROJECT_NAME}.entitlements" \
+            --sign "Developer ID Application : ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
       - uses: actions/upload-artifact@v3
         with:
-          name: hatbor-${{ matrix.targetPlatform }}-${{ steps.buildStep.outputs.buildVersion }}
-          path: build/${{ matrix.targetPlatform }}
+          name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
+          path: build
