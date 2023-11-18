@@ -36,31 +36,22 @@ jobs:
       - name: Import Apple Certificate
         uses: apple-actions/import-codesign-certs@v1
         with:
-          p12-file-base64: ${{ secrets.DEVELOPER_ID_APPLICATION_CERTIFICATE_P12 }}
-          p12-password: ${{ secrets.DEVELOPER_ID_APPLICATION_CERTIFICATE_P12_PASSWORD }}
+          p12-file-base64: ${{ secrets.APPLE_CERTIFICATE_P12 }}
+          p12-password: ${{ secrets.APPLE_CERTIFICATE_P12_PASSWORD }}
 
-      - name: codesign
+      - name: Post Process Build
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_TEAM_NAME: ${{ secrets.APPLE_TEAM_NAME }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           MAC_BUILD_PATH: ${{ format('{0}/build/StandaloneOSX', github.workspace) }}
           PROJECT_NAME: hatbor
-        run: |
-          chmod -R a+xr "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
-          codesign \
-            --deep \
-            --force \
-            --verify \
-            --verbose \
-            --timestamp \
-            --options runtime \
-            --entitlements "${PROJECT_NAME}.entitlements" \
-            --sign "Developer ID Application: ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
-
-      - name: Tar files
-        run: tar -cvf build.tar -C build/StandaloneOSX hatbor.app
+          BUNDLE_IDENTIFIER: com.neoneobeam.hatbor
+          VERSION: ${{ steps.buildStep.outputs.buildVersion }}
+        run: ./post-process-build-mac.sh
 
       - uses: actions/upload-artifact@v3
         with:
           name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
-          path: build.tar
+          path: hatbor.dmg
