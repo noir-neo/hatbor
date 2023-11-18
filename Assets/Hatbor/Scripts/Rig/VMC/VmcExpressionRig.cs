@@ -34,7 +34,8 @@ namespace Hatbor.Rig.VMC
 
         static string ConvertVrm0ToVrm1Preset(string expressionName)
         {
-            return expressionName.ToLower() switch
+            var expressionNameLower = expressionName.ToLower();
+            return expressionNameLower switch
             {
                 "joy" => "happy",
                 "angry" => "angry",
@@ -47,7 +48,7 @@ namespace Hatbor.Rig.VMC
                 "o" => "oh",
                 "blink_l" => "blinkleft",
                 "blink_r" => "blinkright",
-                _ => expressionName
+                _ => expressionNameLower
             };
         }
     }
