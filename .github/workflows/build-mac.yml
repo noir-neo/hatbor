@@ -60,8 +60,9 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           FILE: hatbor.dmg
-          TITLE: ${{ format('macOS {0}', steps.buildStep.outputs.buildVersion) }}
+          CONTENT: ${{ format('hatbor {0} for macOS', steps.buildStep.outputs.buildVersion) }}
         run: |
-          curl -H 'Content-Type: multipart/form-data' \
-            -X POST \
-            -F "file1=@$FILE payload_json={"embeds":[{"title":"$TITLE"}]}" $DISCORD_WEBHOOK
+          curl \
+            -F 'payload_json={"content":"$CONTENT"}' \
+            -F "file1=@$FILE" \
+            $DISCORD_WEBHOOK
