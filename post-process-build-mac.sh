@@ -13,8 +13,9 @@ codesign \
   --entitlements "${PROJECT_NAME}.entitlements" \
   --sign "Developer ID Application: ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "${MAC_BUILD_PATH}/${PROJECT_NAME}.app"
 
-mkdir -p "pkgroot/Applications"
-cp -R "${MAC_BUILD_PATH}/${PROJECT_NAME}.app" "pkgroot/Applications/${PROJECT_NAME}.app"
+rm -rf "pkgroot"
+mkdir -p "pkgroot"
+cp -R "${MAC_BUILD_PATH}/${PROJECT_NAME}.app" "pkgroot/${PROJECT_NAME}.app"
 
 pkgbuild --root "pkgroot" --component-plist "pkg-info.plist" --identifier ${BUNDLE_IDENTIFIER} --version ${VERSION} --install-location "/Applications" "${PROJECT_NAME}.pkg"
 
@@ -23,7 +24,8 @@ productbuild --distribution "Distribution.xml" --package-path . "distribution.pk
 
 productsign --sign "Developer ID Installer: ${APPLE_TEAM_NAME} (${APPLE_TEAM_ID})" "distribution.pkg" "signed.pkg"
 
-mkdir dmg-resources
+rm -rf "dmg-resources"
+mkdir "dmg-resources"
 cp "signed.pkg" "dmg-resources/${PROJECT_NAME}.pkg"
 hdiutil create -srcfolder "dmg-resources" -fs HFS+ -format UDZO -volname "${PROJECT_NAME}" "${PROJECT_NAME}.dmg"
 
