@@ -17,11 +17,11 @@
 				<key>BundleOverwriteAction</key>
 				<string></string>
 				<key>RootRelativeBundlePath</key>
-				<string>Applications/hatbor.app/Contents/PlugIns/StandaloneFileBrowser.bundle</string>
+				<string>hatbor.app/Contents/PlugIns/StandaloneFileBrowser.bundle</string>
 			</dict>
 		</array>
 		<key>RootRelativeBundlePath</key>
-		<string>Applications/hatbor.app</string>
+		<string>hatbor.app</string>
 	</dict>
 </array>
 </plist>
