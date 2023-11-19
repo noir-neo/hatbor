@@ -36,3 +36,15 @@ jobs:
         with:
           name: hatbor-Windows-${{ steps.buildStep.outputs.buildVersion }}
           path: build/StandaloneWindows64
+
+      - name: Upload to Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DIR: ${{ format('{0}/build/StandaloneWindows64', github.workspace) }}
+          ZIP: ${{ format('hatbor-Windows-{0}.zip', steps.buildStep.outputs.buildVersion) }}
+          TITLE: ${{ format('Windows {0}', steps.buildStep.outputs.buildVersion) }}
+        run: |
+          zip -qq -r $ZIP $DIR
+          curl -H 'Content-Type: multipart/form-data' \
+            -X POST \
+            -F "file1=@$ZIP payload_json={"embeds":[{"title":"$TITLE"}]}" $DISCORD_WEBHOOK

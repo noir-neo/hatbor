@@ -55,3 +55,13 @@ jobs:
         with:
           name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
           path: hatbor.dmg
+
+      - name: Upload to Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          FILE: hatbor.dmg
+          TITLE: ${{ format('macOS {0}', steps.buildStep.outputs.buildVersion) }}
+        run: |
+          curl -H 'Content-Type: multipart/form-data' \
+            -X POST \
+            -F "file1=@$FILE payload_json={"embeds":[{"title":"$TITLE"}]}" $DISCORD_WEBHOOK
