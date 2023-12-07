@@ -37,15 +37,3 @@ jobs:
           name: hatbor-Windows-${{ steps.buildStep.outputs.buildVersion }}
           path: build/StandaloneWindows64
 
-      - name: Upload to Discord
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DIR: ${{ format('{0}/build/StandaloneWindows64', github.workspace) }}
-          ZIP: ${{ format('hatbor-Windows-{0}.zip', steps.buildStep.outputs.buildVersion) }}
-          CONTENT: ${{ format('hatbor {0} for Windows', steps.buildStep.outputs.buildVersion) }}
-        run: |
-          zip -qq -r $ZIP $DIR
-          curl \
-            -F 'payload_json={"content":"$CONTENT"}' \
-            -F "file1=@$ZIP" \
-            $DISCORD_WEBHOOK
