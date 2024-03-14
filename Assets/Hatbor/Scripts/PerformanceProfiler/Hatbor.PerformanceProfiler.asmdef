@@ -1,13 +1,9 @@
 {
-    "name": "Hatbor.UI",
-    "rootNamespace": "Hatbor.UI",
+    "name": "Hatbor.PerformanceProfiler",
+    "rootNamespace": "",
     "references": [
-        "VContainer",
-        "UniTask",
-        "UniRx",
-        "Hatbor.VMC",
-        "Hatbor.Config",
-        "Hatbor.PerformanceProfiler"
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

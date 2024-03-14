@@ -3,6 +3,7 @@ using Hatbor.Rig;
 using Hatbor.Rig.VMC;
 using Hatbor.Config;
 using Hatbor.Rig.Fixed;
+using Hatbor.PerformanceProfiler;
 using Hatbor.VMC;
 using VContainer;
 using VContainer.Unity;
@@ -21,6 +22,11 @@ namespace Hatbor.LifetimeScope
             builder.Register<IConfigurable, RenderConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, LightConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, MiscConfig>(Lifetime.Singleton).AsSelf();
+
+            // PerformanceProfiler
+            builder.RegisterEntryPoint<PerformanceProfilerTicker>();
+            builder.Register<IProfilerRecorder, FrameRateProfilerRecorder>(Lifetime.Singleton).AsSelf();
+            builder.Register<IProfilerRecorder, VmcServerProfilerRecorder>(Lifetime.Singleton).AsSelf();
 
             // Rig/VMC
             builder.RegisterEntryPoint<VmcServer>(Lifetime.Singleton).AsSelf();

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hatbor.Config;
+using Hatbor.PerformanceProfiler;
 using UniRx;
 using UnityEngine;
 using uOSC;
@@ -14,6 +15,7 @@ namespace Hatbor.VMC
     public sealed class VmcServer : IStartable, IDisposable
     {
         readonly VmcServerConfig config;
+        readonly VmcServerProfilerRecorder profilerRecorder;
 
         readonly OscServer server = new();
         readonly CompositeDisposable disposables = new();
@@ -34,9 +36,11 @@ namespace Hatbor.VMC
         public float CameraFov { get; private set; }
 
         [Inject]
-        public VmcServer(VmcServerConfig config)
+        public VmcServer(VmcServerConfig config,
+            VmcServerProfilerRecorder profilerRecorder)
         {
             this.config = config;
+            this.profilerRecorder = profilerRecorder;
         }
 
         void IStartable.Start()
@@ -92,6 +96,7 @@ namespace Hatbor.VMC
                     if (IsAvailable)
                     {
                         LastAvailableReceivedTime = Time.time;
+                        profilerRecorder.IncrementCount();
                     }
                     break;
                 }

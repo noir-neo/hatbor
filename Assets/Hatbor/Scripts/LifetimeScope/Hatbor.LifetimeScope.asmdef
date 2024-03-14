@@ -19,7 +19,8 @@
         "Hatbor.TextureStreaming.Spout",
         "Hatbor.Rig.Fixed",
         "Hatbor.HID",
-        "Hatbor.Light"
+        "Hatbor.Light",
+        "Hatbor.PerformanceProfiler"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
