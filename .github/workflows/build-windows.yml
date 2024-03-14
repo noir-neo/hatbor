@@ -41,7 +41,7 @@ jobs:
 
       - name: Archive artifacts
         if: github.event_name == 'release'
-        run: zip -r artifact.zip build/StandaloneWindows64
+        run: cd build && zip -r artifact.zip StandaloneWindows64
 
       - name: Upload Release Asset
         if: github.event_name == 'release'
@@ -50,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./artifact.zip
+          asset_path: build/artifact.zip
           asset_name: hatbor-Windows-${{ steps.buildStep.outputs.buildVersion }}.zip
           asset_content_type: application/zip
