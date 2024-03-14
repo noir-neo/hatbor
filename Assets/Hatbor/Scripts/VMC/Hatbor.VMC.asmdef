@@ -6,7 +6,8 @@
         "UniTask",
         "UniRx",
         "uOSC.Runtime",
-        "Hatbor.Config"
+        "Hatbor.Config",
+        "Hatbor.PerformanceProfiler"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
