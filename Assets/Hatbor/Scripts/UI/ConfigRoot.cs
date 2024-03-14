@@ -34,11 +34,13 @@ namespace Hatbor.UI
         {
             var root = uiDocument.rootVisualElement;
             var container = root.Q<VisualElement>("unity-content-container");
+            var recorderFoldout = new Foldout();
+            container.Add(recorderFoldout);
             foreach (var recorder in profilerRecorders)
             {
                 var performanceGroup = new PerformanceGroup();
                 performanceGroup.Bind(recorder).AddTo(disposables);
-                container.Add(performanceGroup);
+                recorderFoldout.Add(performanceGroup);
             }
             foreach (var config in configs)
             {
