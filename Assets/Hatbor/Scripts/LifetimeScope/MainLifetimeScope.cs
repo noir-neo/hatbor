@@ -25,6 +25,7 @@ namespace Hatbor.LifetimeScope
 
             // PerformanceProfiler
             builder.RegisterEntryPoint<PerformanceProfilerTicker>();
+            builder.Register<IProfilerRecorder, FrameRateProfilerRecorder>(Lifetime.Singleton).AsSelf();
             builder.Register<IProfilerRecorder, VmcServerProfilerRecorder>(Lifetime.Singleton).AsSelf();
 
             // Rig/VMC
