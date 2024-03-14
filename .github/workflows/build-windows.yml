@@ -3,6 +3,8 @@ name: Build Windows
 on:
   push:
     branches: master
+  release:
+    types: [created]
   workflow_dispatch: {}
 
 jobs:
@@ -37,3 +39,17 @@ jobs:
           name: hatbor-Windows-${{ steps.buildStep.outputs.buildVersion }}
           path: build/StandaloneWindows64
 
+      - name: Archive artifacts
+        if: github.event_name == 'release'
+        run: zip -r artifact.zip build/StandaloneWindows64
+
+      - name: Upload Release Asset
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./artifact.zip
+          asset_name: hatbor-Windows-${{ steps.buildStep.outputs.buildVersion }}.zip
+          asset_content_type: application/zip
