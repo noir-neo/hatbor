@@ -6,7 +6,8 @@
         "UniTask",
         "UniRx",
         "Hatbor.VMC",
-        "Hatbor.Config"
+        "Hatbor.Config",
+        "Hatbor.PerformanceProfiler"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
