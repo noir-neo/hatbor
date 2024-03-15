@@ -66,5 +66,5 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./hatbor.dmg
-          asset_name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}.zip
+          asset_name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}.dmg
           asset_content_type: application/octet-stream
