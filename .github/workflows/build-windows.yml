@@ -41,7 +41,10 @@ jobs:
 
       - name: Archive artifacts
         if: github.event_name == 'release'
-        run: cd build && zip -r artifact.zip StandaloneWindows64
+        run: |
+          chmod -R 777 build
+          cd build
+          zip -r artifact.zip StandaloneWindows64
 
       - name: Upload Release Asset
         if: github.event_name == 'release'
