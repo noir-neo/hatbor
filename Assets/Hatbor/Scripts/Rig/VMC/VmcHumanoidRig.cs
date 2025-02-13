@@ -1,4 +1,5 @@
 using Hatbor.VMC;
+using UnityEngine;
 using UniVRM10;
 using VContainer;
 
@@ -23,6 +24,7 @@ namespace Hatbor.Rig.VMC
         void Update(INormalizedPoseApplicable normalizedPoseApplicable)
         {
             var boneLocalPoses = vmcServer.BoneLocalPoses;
+            normalizedPoseApplicable.SetRawHipsPosition(boneLocalPoses[HumanBodyBones.Hips].position);
             foreach (var t in boneLocalPoses)
             {
                 var (bone, pose) = t;
