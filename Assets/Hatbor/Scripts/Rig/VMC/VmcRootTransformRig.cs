@@ -18,8 +18,7 @@ namespace Hatbor.Rig.VMC
         {
             vmcServer.ProcessRead();
             var rootPose = vmcServer.RootPose;
-            rootTransform.position = rootPose.position;
-            rootTransform.rotation = rootPose.rotation;
+            rootTransform.SetLocalPositionAndRotation(rootPose.position, rootPose.rotation);
         }
     }
 }
