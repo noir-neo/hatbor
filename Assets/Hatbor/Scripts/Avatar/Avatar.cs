@@ -45,6 +45,7 @@ namespace Hatbor.Avatar
         static async UniTask<Vrm10Instance> LoadAsync(string path, CancellationToken ctx)
         {
             var instance = await Vrm10.LoadPathAsync(path,
+                controlRigGenerationOption: ControlRigGenerationOption.None,
                 materialGenerator: new UrpVrm10MaterialDescriptorGenerator(),
                 ct: ctx);
             return instance;
