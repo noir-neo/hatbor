@@ -53,7 +53,7 @@ jobs:
           VERSION: ${{ steps.buildStep.outputs.buildVersion }}
         run: ./post-process-build-mac.sh
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: hatbor-macOS-${{ steps.buildStep.outputs.buildVersion }}
           path: hatbor.dmg
