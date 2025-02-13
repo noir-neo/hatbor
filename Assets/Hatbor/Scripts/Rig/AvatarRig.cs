@@ -37,9 +37,9 @@ namespace Hatbor.Rig
 
         public void Update(Vrm10Instance instance)
         {
-            rootTransformRig.Update(instance.transform);
-            humanoidRig.Update(instance.Runtime.ControlRig);
-            expressionRig.Update(instance.Runtime.Expression);
+            rootTransformRig.Update(instance);
+            humanoidRig.Update(instance);
+            expressionRig.Update(instance);
         }
     }
 }

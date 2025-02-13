@@ -15,10 +15,10 @@ namespace Hatbor.Rig.VMC
             this.vmcServer = vmcServer;
         }
 
-        void IHumanoidRig.Update(Vrm10RuntimeControlRig controlRig)
+        void IHumanoidRig.Update(Vrm10Instance instance)
         {
             vmcServer.ProcessRead();
-            Update(controlRig);
+            Update(instance.Runtime.ControlRig);
         }
 
         void Update(INormalizedPoseApplicable normalizedPoseApplicable)

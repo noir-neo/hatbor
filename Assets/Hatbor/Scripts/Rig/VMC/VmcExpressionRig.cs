@@ -15,8 +15,10 @@ namespace Hatbor.Rig.VMC
             this.vmcServer = vmcServer;
         }
 
-        void IExpressionRig.Update(Vrm10RuntimeExpression expression)
+        void IExpressionRig.Update(Vrm10Instance instance)
         {
+            var expression = instance.Runtime.Expression;
+
             vmcServer.ProcessRead();
 
             var blendShapeValues = vmcServer.BlendShapeValues
