@@ -1,4 +1,6 @@
 using Hatbor.VMC;
+using UniHumanoid;
+using UnityEngine;
 using UniVRM10;
 using VContainer;
 
@@ -14,19 +16,27 @@ namespace Hatbor.Rig.VMC
             this.vmcServer = vmcServer;
         }
 
-        void IHumanoidRig.Update(Vrm10RuntimeControlRig controlRig)
+        void IHumanoidRig.Update(Vrm10Instance instance)
         {
             vmcServer.ProcessRead();
-            Update(controlRig);
+            Update(instance.Humanoid);
         }
 
-        void Update(INormalizedPoseApplicable normalizedPoseApplicable)
+        void Update(Humanoid humanoid)
         {
             var boneLocalPoses = vmcServer.BoneLocalPoses;
-            foreach (var t in boneLocalPoses)
+            foreach (var (bone, pose) in boneLocalPoses)
             {
-                var (bone, pose) = t;
-                normalizedPoseApplicable.SetNormalizedLocalRotation(bone, pose.rotation);
+                var t = humanoid.GetBoneTransform(bone);
+                if (t == null) continue;
+                if (bone == HumanBodyBones.Hips)
+                {
+                    t.SetLocalPositionAndRotation(pose.position, pose.rotation);
+                }
+                else
+                {
+                    t.localRotation = pose.rotation;
+                }
             }
         }
     }

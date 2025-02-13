@@ -4,6 +4,6 @@ namespace Hatbor.Rig
 {
     public interface IExpressionRig
     {
-        void Update(Vrm10RuntimeExpression expression);
+        void Update(Vrm10Instance instance);
     }
 }

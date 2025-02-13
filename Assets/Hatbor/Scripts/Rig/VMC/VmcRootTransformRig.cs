@@ -1,5 +1,6 @@
 using Hatbor.VMC;
 using UnityEngine;
+using UniVRM10;
 using VContainer;
 
 namespace Hatbor.Rig.VMC
@@ -14,12 +15,11 @@ namespace Hatbor.Rig.VMC
             this.vmcServer = vmcServer;
         }
 
-        void IRootTransformRig.Update(Transform rootTransform)
+        void IRootTransformRig.Update(Vrm10Instance instance)
         {
             vmcServer.ProcessRead();
             var rootPose = vmcServer.RootPose;
-            rootTransform.position = rootPose.position;
-            rootTransform.rotation = rootPose.rotation;
+            instance.transform.SetLocalPositionAndRotation(rootPose.position, rootPose.rotation);
         }
     }
 }

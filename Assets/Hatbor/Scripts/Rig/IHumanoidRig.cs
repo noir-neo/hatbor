@@ -4,6 +4,6 @@ namespace Hatbor.Rig
 {
     public interface IHumanoidRig
     {
-        void Update(Vrm10RuntimeControlRig animator);
+        void Update(Vrm10Instance instance);
     }
 }
