@@ -42,8 +42,8 @@ jobs:
       - name: Archive artifacts
         if: github.event_name == 'release'
         run: |
-          chown -R $(whoami) build
-          chmod -R 777 build
+          sudo chown -R $(whoami) build
+          sudo chmod -R 777 build
           cd build
           zip -r artifact.zip StandaloneWindows64
 
