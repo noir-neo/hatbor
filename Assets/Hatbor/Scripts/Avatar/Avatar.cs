@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Hatbor.Rig;
+using UniGLTF;
 using UniVRM10;
 using VContainer;
 using VContainer.Unity;
@@ -26,6 +27,7 @@ namespace Hatbor.Avatar
         async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
             instance = await LoadAsync(path, cancellation);
+            Setup(instance.GetComponent<RuntimeGltfInstance>());
             rig.Initialize(instance);
         }
 
@@ -49,6 +51,11 @@ namespace Hatbor.Avatar
                 materialGenerator: new UrpVrm10MaterialDescriptorGenerator(),
                 ct: ctx);
             return instance;
+        }
+
+        static void Setup(RuntimeGltfInstance instance)
+        {
+            instance.EnableUpdateWhenOffscreen();
         }
     }
 }
