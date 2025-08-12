@@ -11,10 +11,13 @@ namespace Hatbor.Config
 
         [SerializeField] public BoolReactiveProperty enabled = new(true);
         [SerializeField] public IntReactiveProperty port = new(39539);
+        [SerializeField] public BoolReactiveProperty debugEnabled = new(false);
 
         [ConfigProperty("Enabled")]
         public ReactiveProperty<bool> Enabled => enabled;
         [ConfigProperty("Port")]
         public ReactiveProperty<int> Port => port;
+        [ConfigProperty("Debug Enabled")]
+        public ReactiveProperty<bool> DebugEnabled => debugEnabled;
     }
 }
