@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.5); font-size: 20px; flex-grow: 1; padding-left: 600px;">
+    <ui:VisualElement style="background-color: rgba(255, 255, 255, 0.5); font-size: 20px; flex-grow: 1; padding-left: 600px;">
         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="vmc-debug-label" style="font-size: 12px; white-space: normal;" />
     </ui:VisualElement>
 </ui:UXML>
