@@ -17,6 +17,7 @@ namespace Hatbor.LifetimeScope
             // Config
             builder.RegisterEntryPoint<ConfigStore>();
             builder.Register<IConfigurable, VmcServerConfig>(Lifetime.Singleton).AsSelf();
+            builder.Register<IConfigurable, VmcCameraConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, FixedCameraConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, AvatarConfig>(Lifetime.Singleton).AsSelf();
             builder.Register<IConfigurable, RenderConfig>(Lifetime.Singleton).AsSelf();
