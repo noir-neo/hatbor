@@ -22,10 +22,18 @@ jobs:
           restore-keys: |
             Library-Test-
 
+      - name: Extract Unity serial from license
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          serial=$(printf '%s' "$UNITY_LICENSE" | sed -n 's/.*<DeveloperData Value="\([^"]*\)".*/\1/p' | base64 -d | tail -c +5)
+          echo "::add-mask::$serial"
+          echo "UNITY_SERIAL=$serial" >> "$GITHUB_ENV"
+
       - name: Run tests
         uses: game-ci/unity-test-runner@v4
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_SERIAL: ${{ env.UNITY_SERIAL }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
