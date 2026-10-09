@@ -1,0 +1,36 @@
+{
+    "name": "Hatbor.Tests",
+    "rootNamespace": "Hatbor.Tests",
+    "references": [
+        "UnityEngine.TestRunner",
+        "VContainer",
+        "UniTask",
+        "UniRx",
+        "uOSC.Runtime",
+        "VRM10",
+        "VRMShaders.GLTF.IO.Runtime",
+        "UniGLTF",
+        "UniHumanoid",
+        "Hatbor.Config",
+        "Hatbor.Rig",
+        "Hatbor.Rig.VMC",
+        "Hatbor.VMC",
+        "Hatbor.Camera",
+        "Hatbor.UI",
+        "Hatbor.LifetimeScope",
+        "Hatbor.PerformanceProfiler"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

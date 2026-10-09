@@ -1,0 +1,40 @@
+name: Test
+
+on:
+  push:
+    branches: master
+  pull_request: {}
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    name: Run PlayMode tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-Test-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-Test-
+
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          testMode: playmode
+          artifactsPath: test-results
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: test-results
