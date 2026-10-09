@@ -18,6 +18,8 @@ namespace Hatbor.Config
         [SerializeField]
         FloatReactiveProperty fieldOfView = new (30f);
 
+        readonly Subject<Unit> resetToAvatarHeadRequested = new();
+
         [ConfigProperty("Enabled")]
         public ReactiveProperty<bool> Enabled => enabled;
         [ConfigProperty("Position")]
@@ -26,5 +28,14 @@ namespace Hatbor.Config
         public ReactiveProperty<Vector3> CameraRotation => cameraRotation;
         [ConfigProperty("Field of View")]
         public ReactiveProperty<float> FieldOfView => fieldOfView;
+        [ConfigProperty("Reset to Avatar Head")]
+        public Action ResetToAvatarHead => RequestResetToAvatarHead;
+
+        public IObservable<Unit> ResetToAvatarHeadRequested => resetToAvatarHeadRequested;
+
+        void RequestResetToAvatarHead()
+        {
+            resetToAvatarHeadRequested.OnNext(Unit.Default);
+        }
     }
 }

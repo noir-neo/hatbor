@@ -5,7 +5,8 @@
         "VContainer",
         "UniTask",
         "UniRx",
-        "VRM10"
+        "VRM10",
+        "UniHumanoid"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

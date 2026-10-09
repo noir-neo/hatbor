@@ -41,6 +41,7 @@ namespace Hatbor.LifetimeScope
 
             // Avatar
             builder.Register<AvatarRig>(Lifetime.Singleton);
+            builder.Register<AvatarHead>(Lifetime.Singleton);
             builder.RegisterEntryPoint<AvatarLoader>(Lifetime.Singleton);
         }
     }
