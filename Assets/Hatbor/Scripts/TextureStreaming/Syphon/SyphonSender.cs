@@ -3,19 +3,30 @@
 
 using System;
 using System.Runtime.InteropServices;
+using Klak.Syphon;
 using UnityEngine;
+using VContainer;
 
 namespace Hatbor.TextureStreaming.Syphon
 {
     public sealed class SyphonSender : ITextureSender
     {
+        static readonly int KeepAlphaId = Shader.PropertyToID("_KeepAlpha");
+
         IntPtr serverInstance;
         Texture serverTexture;
         Material blitMaterial;
+        readonly SyphonResources resources;
 
         public bool AlphaSupport { get; set; }
 
         public bool IsRunning => serverInstance != IntPtr.Zero;
+
+        [Inject]
+        public SyphonSender(SyphonResources resources)
+        {
+            this.resources = resources;
+        }
 
         void IDisposable.Dispose()
         {
@@ -43,7 +54,7 @@ namespace Hatbor.TextureStreaming.Syphon
 
             if (blitMaterial == null)
             {
-                blitMaterial = new Material(Shader.Find("Hidden/Klak/Syphon/Blit"))
+                blitMaterial = new Material(resources.blitShader)
                 {
                     hideFlags = HideFlags.DontSave
                 };
@@ -70,7 +81,8 @@ namespace Hatbor.TextureStreaming.Syphon
                 dst.width, dst.height, 0,
                 RenderTextureFormat.Default, RenderTextureReadWrite.Default
             );
-            Graphics.Blit(src, temp, blitMaterial, AlphaSupport ? 1 : 0);
+            blitMaterial.SetFloat(KeepAlphaId, AlphaSupport ? 1 : 0);
+            Graphics.Blit(src, temp, blitMaterial);
             Graphics.CopyTexture(temp, dst);
             RenderTexture.ReleaseTemporary(temp);
         }
