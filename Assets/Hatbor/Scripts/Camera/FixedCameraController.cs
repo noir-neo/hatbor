@@ -1,5 +1,7 @@
 using System;
 using Hatbor.Config;
+using Hatbor.Rig;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using VContainer;
@@ -10,26 +12,37 @@ namespace Hatbor.Camera
 {
     public sealed class FixedCameraController : IStartable, IDisposable, ITickable
     {
+        const float ResetDistanceFromHead = 1f;
+
         readonly FixedCameraConfig config;
         readonly RenderConfig renderConfig;
+        readonly AvatarHead avatarHead;
 
         readonly Input input = new();
+        readonly CompositeDisposable disposables = new();
 
         [Inject]
         public FixedCameraController(FixedCameraConfig config,
-            RenderConfig renderConfig)
+            RenderConfig renderConfig,
+            AvatarHead avatarHead)
         {
             this.config = config;
             this.renderConfig = renderConfig;
+            this.avatarHead = avatarHead;
         }
 
         void IStartable.Start()
         {
             input.Enable();
+
+            config.ResetToAvatarHeadRequested
+                .Subscribe(_ => ResetToAvatarHead())
+                .AddTo(disposables);
         }
 
         void IDisposable.Dispose()
         {
+            disposables.Dispose();
             input.Dispose();
         }
 
@@ -52,6 +65,15 @@ namespace Hatbor.Camera
 
             var look = input.Camera.LookPointer.ReadValue<Vector2>();
             config.CameraRotation.Value += Quaternion.Euler(0, 0, rot.eulerAngles.z) * new Vector3(-look.y, look.x * mirror, 0f);
+        }
+
+        void ResetToAvatarHead()
+        {
+            if (!avatarHead.TryGetFacingPose(out var headPose)) return;
+
+            var headForward = headPose.rotation * Vector3.forward;
+            config.CameraPosition.Value = headPose.position + headForward * ResetDistanceFromHead;
+            config.CameraRotation.Value = Quaternion.LookRotation(-headForward, Vector3.up).eulerAngles;
         }
     }
 }

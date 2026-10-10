@@ -14,14 +14,16 @@ namespace Hatbor.Avatar
     {
         readonly string path;
         readonly AvatarRig rig;
+        readonly AvatarHead head;
 
         Vrm10Instance instance;
 
         [Inject]
-        public Avatar(string path, AvatarRig rig)
+        public Avatar(string path, AvatarRig rig, AvatarHead head)
         {
             this.path = path;
             this.rig = rig;
+            this.head = head;
         }
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
@@ -29,6 +31,7 @@ namespace Hatbor.Avatar
             instance = await LoadAsync(path, cancellation);
             Setup(instance.GetComponent<RuntimeGltfInstance>());
             rig.Initialize(instance);
+            head.Bind(instance);
         }
 
         void ITickable.Tick()
