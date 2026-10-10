@@ -11,24 +11,22 @@ namespace Hatbor.UI
     {
         readonly IFileBrowser fileBrowser;
 
-        readonly Label label;
-        readonly VisualElement container;
+        readonly Foldout foldout;
 
         public ConfigGroup(IFileBrowser fileBrowser)
         {
             this.fileBrowser = fileBrowser;
 
-            label = new Label();
-            hierarchy.Add(label);
-            container = new VisualElement();
-            hierarchy.Add(container);
+            AddToClassList("config-group");
+            foldout = new Foldout();
+            hierarchy.Add(foldout);
         }
 
         public IDisposable Bind(IConfigurable configurable)
         {
             var configurableType = configurable.GetType();
 
-            label.text = GetConfigGroupAttribute(configurableType).Label;
+            foldout.text = GetConfigGroupAttribute(configurableType).Label;
 
             var disposables = new CompositeDisposable();
 
@@ -42,7 +40,8 @@ namespace Hatbor.UI
                 var attr = attributes[0];
                 var (element, disposable) = CreateFieldAndBind(property, attr);
                 disposable.AddTo(disposables);
-                container.Add(element);
+                element.AddToClassList("config-field");
+                foldout.Add(element);
             }
 
             return disposables;
@@ -61,6 +60,8 @@ namespace Hatbor.UI
             {
                 (ReactiveProperty<bool> p, _) =>
                     CreateFieldAndBind<bool, Toggle>(p, attr.Label),
+                (ReactiveProperty<float> p, RangeConfigPropertyAttribute a) =>
+                    CreateSliderAndBind(p, a),
                 (ReactiveProperty<float> p, _) =>
                     CreateFieldAndBind<float, FloatField>(p, attr.Label),
                 (ReactiveProperty<int> p, _) =>
@@ -88,6 +89,16 @@ namespace Hatbor.UI
                 Label = label
             };
             return (propertyField, propertyField.Bind(property));
+        }
+
+        static (VisualElement, IDisposable) CreateSliderAndBind(ReactiveProperty<float> property, RangeConfigPropertyAttribute attr)
+        {
+            property.Value = Mathf.Clamp(property.Value, attr.Min, attr.Max);
+            var sliderField = new SliderField(attr.Min, attr.Max)
+            {
+                Label = attr.Label
+            };
+            return (sliderField, sliderField.Bind(property));
         }
 
         static (VisualElement, IDisposable) CreateColorFieldAndBind(ReactiveProperty<Color> property, string label)

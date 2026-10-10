@@ -1,0 +1,264 @@
+.config-root {
+    --glass-background: rgba(20, 24, 34, 0.68);
+    --glass-surface: rgba(255, 255, 255, 0.06);
+    --glass-surface-hover: rgba(255, 255, 255, 0.14);
+    --glass-surface-active: rgba(255, 255, 255, 0.22);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border-subtle: rgba(255, 255, 255, 0.1);
+    --text-primary: rgba(255, 255, 255, 0.94);
+    --text-secondary: rgba(255, 255, 255, 0.72);
+    --accent: rgb(132, 204, 255);
+    --accent-contrast: rgb(16, 24, 36);
+
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    bottom: 20px;
+    width: 440px;
+    align-items: flex-start;
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.panel-toggle {
+    margin: 0 0 10px 0;
+    padding: 6px 14px;
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: var(--glass-border);
+    background-color: var(--glass-background);
+    color: var(--text-primary);
+    font-size: 12px;
+    -unity-font-style: bold;
+    transition-property: background-color, border-color;
+    transition-duration: 0.15s;
+}
+
+.panel-toggle:hover {
+    background-color: rgba(48, 56, 74, 0.62);
+    border-color: rgba(255, 255, 255, 0.36);
+}
+
+.panel-toggle:active {
+    background-color: rgba(64, 74, 96, 0.7);
+}
+
+.config-panel {
+    align-self: stretch;
+    flex-shrink: 1;
+    padding: 14px;
+    border-radius: 20px;
+    border-width: 1px;
+    border-color: var(--glass-border);
+    border-top-color: rgba(255, 255, 255, 0.34);
+    background-color: var(--glass-background);
+}
+
+.config-panel--hidden {
+    display: none;
+}
+
+.status-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    margin-bottom: 6px;
+}
+
+.status-chip {
+    margin: 0 6px 6px 0;
+    padding: 4px 10px;
+    border-radius: 11px;
+    border-width: 1px;
+    border-color: var(--glass-border-subtle);
+    background-color: var(--glass-surface);
+}
+
+.status-chip > .unity-label {
+    margin: 0;
+    padding: 0;
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.config-groups {
+    flex-shrink: 1;
+}
+
+.config-groups .unity-scroller--vertical {
+    width: 8px;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.config-groups .unity-scroller__low-button,
+.config-groups .unity-scroller__high-button {
+    display: none;
+}
+
+.config-groups .unity-scroller--vertical > .unity-scroller__slider {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.config-groups .unity-scroller .unity-base-slider__tracker {
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.config-groups .unity-scroller .unity-base-slider__dragger {
+    left: 1px;
+    width: 6px;
+    border-width: 0;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.28);
+}
+
+.config-groups .unity-scroller .unity-base-slider__dragger:hover {
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+.config-group {
+    margin: 0 6px 8px 0;
+    padding: 4px 8px 6px 8px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: var(--glass-border-subtle);
+    background-color: var(--glass-surface);
+}
+
+.config-group .unity-foldout__toggle {
+    margin: 0;
+    padding: 4px 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.config-group .unity-foldout__text {
+    color: var(--text-primary);
+    font-size: 13px;
+    -unity-font-style: bold;
+}
+
+.config-group .unity-foldout__checkmark {
+    -unity-background-image-tint-color: var(--text-secondary);
+}
+
+.config-group .unity-foldout__toggle:hover .unity-foldout__checkmark {
+    -unity-background-image-tint-color: var(--text-primary);
+}
+
+.config-group .unity-foldout__content {
+    margin-left: 4px;
+    padding-top: 2px;
+}
+
+.config-field .unity-base-field {
+    margin: 3px 0;
+}
+
+.config-field .unity-base-field__label {
+    min-width: 150px;
+    color: var(--text-secondary);
+}
+
+.config-field .unity-base-field:focus .unity-base-field__label {
+    color: var(--accent);
+}
+
+.config-group .unity-composite-field__input {
+    flex-direction: row;
+}
+
+.config-group .unity-composite-field__input > .unity-composite-field__field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    margin: 0 0 0 6px;
+}
+
+.config-group .unity-composite-field__input > .unity-composite-field__field--first {
+    margin-left: 0;
+}
+
+.config-group .unity-composite-field__field > .unity-base-field__label {
+    min-width: 12px;
+    margin-right: 2px;
+}
+
+.config-group .unity-base-text-field__input {
+    --unity-cursor-color: var(--accent);
+    --unity-selection-color: rgba(132, 204, 255, 0.35);
+    padding: 3px 6px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: var(--glass-border-subtle);
+    background-color: rgba(0, 0, 0, 0.28);
+    color: var(--text-primary);
+}
+
+.config-group .unity-base-text-field__input:hover {
+    border-color: var(--glass-border);
+}
+
+.config-group .unity-base-text-field__input:focus {
+    border-color: var(--accent);
+}
+
+.config-field .unity-toggle > .unity-toggle__input > #unity-checkmark {
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: var(--glass-border);
+    background-color: rgba(0, 0, 0, 0.28);
+    -unity-background-image-tint-color: var(--accent-contrast);
+}
+
+.config-field .unity-toggle:hover > .unity-toggle__input > #unity-checkmark {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.config-field .unity-toggle:checked > .unity-toggle__input > #unity-checkmark {
+    border-color: var(--accent);
+    background-color: var(--accent);
+}
+
+.config-group .unity-slider .unity-base-slider__tracker {
+    border-width: 0;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.config-group .unity-slider .unity-base-slider__dragger {
+    border-width: 0;
+    border-radius: 5px;
+    background-color: var(--accent);
+}
+
+.config-group .unity-slider .unity-base-slider__dragger-border {
+    display: none;
+}
+
+.config-group .unity-slider .unity-base-slider__text-field {
+    width: 64px;
+    margin: 0 0 0 8px;
+}
+
+.config-group .unity-button {
+    margin: 4px 0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: var(--glass-border);
+    background-color: var(--glass-surface);
+    color: var(--text-primary);
+    transition-property: background-color, border-color;
+    transition-duration: 0.15s;
+}
+
+.config-group .unity-button:hover {
+    border-color: rgba(255, 255, 255, 0.36);
+    background-color: var(--glass-surface-hover);
+}
+
+.config-group .unity-button:active {
+    background-color: var(--glass-surface-active);
+}
