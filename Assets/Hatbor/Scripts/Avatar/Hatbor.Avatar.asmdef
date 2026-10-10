@@ -6,7 +6,7 @@
         "UniTask",
         "UniRx",
         "VRM10",
-        "VRMShaders.GLTF.IO.Runtime",
+        "UniGLTF.Utils",
         "UniGLTF",
         "Hatbor.Rig",
         "Hatbor.Config"

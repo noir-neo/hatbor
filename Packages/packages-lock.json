@@ -86,7 +86,7 @@
     },
     "com.unity.mathematics": {
       "version": "1.3.3",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -227,44 +227,27 @@
       "url": "https://packages.unity.com"
     },
     "com.vrmc.gltf": {
-      "version": "https://github.com/vrm-c/UniVRM.git?path=/Assets/UniGLTF#v0.115.0",
+      "version": "https://github.com/vrm-c/UniVRM.git?path=/Packages/UniGLTF#v0.131.3",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.vrmc.vrmshaders": "0.115.0",
-        "com.unity.modules.animation": "1.0.0"
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.test-framework": "1.4.6",
+        "com.unity.mathematics": "1.2.6"
       },
-      "hash": "7e052b19b3c0b4cd02e63159fc37db820729554e"
-    },
-    "com.vrmc.univrm": {
-      "version": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM#v0.115.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.vrmc.vrmshaders": "0.115.0",
-        "com.vrmc.gltf": "0.115.0",
-        "com.unity.ugui": "1.0.0"
-      },
-      "hash": "7e052b19b3c0b4cd02e63159fc37db820729554e"
+      "hash": "9750dadc592f421c356bf0376c73e61abbe323e3"
     },
     "com.vrmc.vrm": {
-      "version": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRM10#v0.115.0",
+      "version": "https://github.com/vrm-c/UniVRM.git?path=/Packages/VRM10#v0.131.3",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.vrmc.vrmshaders": "0.115.0",
-        "com.vrmc.gltf": "0.115.0"
+        "com.unity.timeline": "1.7.6",
+        "com.vrmc.gltf": "0.131.3"
       },
-      "hash": "7e052b19b3c0b4cd02e63159fc37db820729554e"
-    },
-    "com.vrmc.vrmshaders": {
-      "version": "https://github.com/vrm-c/UniVRM.git?path=/Assets/VRMShaders#v0.115.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.modules.imageconversion": "1.0.0"
-      },
-      "hash": "7e052b19b3c0b4cd02e63159fc37db820729554e"
+      "hash": "9750dadc592f421c356bf0376c73e61abbe323e3"
     },
     "io.github.gkngkc.unity-standalone-file-browser": {
       "version": "https://github.com/noir-neo/UnityStandaloneFileBrowser.git?path=Assets/StandaloneFileBrowser",
