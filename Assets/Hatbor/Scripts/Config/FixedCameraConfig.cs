@@ -26,7 +26,7 @@ namespace Hatbor.Config
         public ReactiveProperty<Vector3> CameraPosition => cameraPosition;
         [ConfigProperty("Rotation")]
         public ReactiveProperty<Vector3> CameraRotation => cameraRotation;
-        [ConfigProperty("Field of View")]
+        [RangeConfigProperty("Field of View", 1f, 120f)]
         public ReactiveProperty<float> FieldOfView => fieldOfView;
         [ConfigProperty("Reset to Avatar Head")]
         public Action ResetToAvatarHead => RequestResetToAvatarHead;

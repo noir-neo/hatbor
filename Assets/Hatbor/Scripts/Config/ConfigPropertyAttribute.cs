@@ -24,4 +24,17 @@ namespace Hatbor.Config
             Extension = extension;
         }
     }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class RangeConfigPropertyAttribute : ConfigPropertyAttribute
+    {
+        public float Min { get; }
+        public float Max { get; }
+
+        public RangeConfigPropertyAttribute(string label, float min, float max) : base(label)
+        {
+            Min = min;
+            Max = max;
+        }
+    }
 }

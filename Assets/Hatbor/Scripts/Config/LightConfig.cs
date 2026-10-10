@@ -19,11 +19,11 @@ namespace Hatbor.Config
         public ReactiveProperty<Vector3> Direction => direction;
         [ConfigProperty("Color")]
         public ReactiveProperty<Color> Color => color;
-        [ConfigProperty("Temperature")]
+        [RangeConfigProperty("Temperature", 1500f, 20000f)]
         public ReactiveProperty<float> ColorTemperature => colorTemperature;
-        [ConfigProperty("Intensity")]
+        [RangeConfigProperty("Intensity", 0f, 10f)]
         public ReactiveProperty<float> Intensity => intensity;
-        [ConfigProperty("Indirect Multiplier")]
+        [RangeConfigProperty("Indirect Multiplier", 0f, 10f)]
         public ReactiveProperty<float> BounceIntensity => bounceIntensity;
 
 

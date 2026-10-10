@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Hatbor.Config;
 using Hatbor.PerformanceProfiler;
 using UniRx;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
 
 namespace Hatbor.UI
 {
-    public sealed class ConfigRoot : IStartable, IDisposable
+    public sealed class ConfigRoot : IStartable, ITickable, IDisposable
     {
         readonly UIDocument uiDocument;
         readonly IEnumerable<IConfigurable> configs;
@@ -17,6 +18,9 @@ namespace Hatbor.UI
         readonly IFileBrowser fileBrowser;
 
         readonly CompositeDisposable disposables = new();
+
+        VisualElement panel;
+        bool isEditingText;
 
         [Inject]
         public ConfigRoot(UIDocument uiDocument,
@@ -33,21 +37,55 @@ namespace Hatbor.UI
         void IStartable.Start()
         {
             var root = uiDocument.rootVisualElement;
-            var container = root.Q<VisualElement>("unity-content-container");
-            var recorderFoldout = new Foldout();
-            container.Add(recorderFoldout);
+            panel = root.Q<VisualElement>("config-panel");
+            root.RegisterCallback<FocusInEvent>(OnFocusIn);
+            root.RegisterCallback<FocusOutEvent>(OnFocusOut);
+            Disposable.Create(() =>
+                {
+                    root.UnregisterCallback<FocusInEvent>(OnFocusIn);
+                    root.UnregisterCallback<FocusOutEvent>(OnFocusOut);
+                })
+                .AddTo(disposables);
+            root.Q<Button>("panel-toggle").OnClickAsObservable()
+                .Subscribe(_ => TogglePanel())
+                .AddTo(disposables);
+            var statusBar = root.Q<VisualElement>("status-bar");
             foreach (var recorder in profilerRecorders)
             {
                 var performanceGroup = new PerformanceGroup();
                 performanceGroup.Bind(recorder).AddTo(disposables);
-                recorderFoldout.Add(performanceGroup);
+                statusBar.Add(performanceGroup);
             }
+            var groups = root.Q<ScrollView>("config-groups");
             foreach (var config in configs)
             {
                 var configGroup = new ConfigGroup(fileBrowser);
                 configGroup.Bind(config).AddTo(disposables);
-                container.Add(configGroup);
+                groups.Add(configGroup);
             }
+        }
+
+        void ITickable.Tick()
+        {
+            if (Keyboard.current is not { hKey: { wasPressedThisFrame: true } }) return;
+            if (isEditingText) return;
+            TogglePanel();
+        }
+
+        void OnFocusIn(FocusInEvent e)
+        {
+            isEditingText = e.target is TextElement { parent: { } parent } &&
+                            parent.ClassListContains(TextInputBaseField<string>.inputUssClassName);
+        }
+
+        void OnFocusOut(FocusOutEvent e)
+        {
+            isEditingText = false;
+        }
+
+        void TogglePanel()
+        {
+            panel.ToggleInClassList("config-panel--hidden");
         }
 
         void IDisposable.Dispose()
